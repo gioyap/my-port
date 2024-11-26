@@ -1,101 +1,168 @@
-import Image from "next/image";
+"use client";
+import { useEffect, useState } from "react";
+import { FaGithub, FaLinkedin, FaFacebook } from "react-icons/fa";
 
-export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+export default function Portfolio() {
+	const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+	useEffect(() => {
+		const handleMouseMove = (event: MouseEvent) => {
+			setMousePosition({ x: event.clientX, y: event.clientY });
+		};
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+		window.addEventListener("mousemove", handleMouseMove);
+
+		// Cleanup on unmount
+		return () => window.removeEventListener("mousemove", handleMouseMove);
+	}, []);
+
+	return (
+		<div className="flex flex-col lg:flex-row w-full h-screen py-16 lg:gap-x-12">
+			<div
+				className="absolute pointer-events-none rounded-full"
+				style={{
+					width: 700,
+					height: 700,
+					top: mousePosition.y - 350,
+					left: mousePosition.x - 350,
+					background:
+						"radial-gradient(circle, rgba(37, 99, 235, 0.1) 0%, rgba(15, 23, 42, 0.02) 50%, rgba(15, 23, 42, 0) 100%)",
+					zIndex: 10,
+				}}
+			/>
+			{/* Left Side: Header Component */}
+			<div className="w-full lg:w-1/2 h-full flex flex-col justify-between z-20 mb-32">
+				<div className="flex flex-col items-start text-white h-full mb-12">
+					<h1 className=" text-4xl font-semibold mb-4">Gio Edrian L. Yap</h1>
+					<h2 className=" text-2xl font-medium mb-4">Full Stack Developer</h2>
+					<p className="text-base lg:text-lg mb-4">
+						Brief intro about yourself. Something concise but meaningful that
+						highlights your skills or personality.
+					</p>
+
+					{/* Vertical Links */}
+					<ul className="space-y-4 mt-8 hidden lg:block">
+						<li>
+							<a href="#about" className="hover:text-blue-400">
+								About
+							</a>
+						</li>
+						<li>
+							<a href="#experience" className="hover:text-blue-400">
+								Experience
+							</a>
+						</li>
+						<li>
+							<a href="#project" className="hover:text-blue-400">
+								Project
+							</a>
+						</li>
+					</ul>
+				</div>
+				{/* Social Media Links */}
+				<div className="flex space-x-6">
+					<a
+						href="https://github.com/yourusername"
+						target="_blank"
+						rel="noopener noreferrer"
+						className="text-white hover:text-blue-400"
+					>
+						<FaGithub size={24} />
+					</a>
+
+					<a
+						href="https://www.linkedin.com/in/yourusername"
+						target="_blank"
+						rel="noopener noreferrer"
+						className="text-white hover:text-blue-400"
+					>
+						<FaLinkedin size={24} />
+					</a>
+
+					<a
+						href="https://www.facebook.com/yourusername"
+						target="_blank"
+						rel="noopener noreferrer"
+						className="text-white hover:text-blue-400"
+					>
+						<FaFacebook size={24} />
+					</a>
+				</div>
+			</div>
+
+			{/* Right Side: Content */}
+			<div className="w-full lg:w-2/3 lg:overflow-y-scroll scrollbar-hide text-white relative z-0 h-screen">
+				{/* Content Sections */}
+				<section id="about" className="mb-12 lg:mb-24">
+					<h2 className="text-2xl lg:text-3xl font-semibold mb-4">About Me</h2>
+					<p className="mb-4">
+						Paragraph 1 about you. Describe your journey, passion, and
+						motivations in software development. Lorem ipsum dolor sit, amet
+						consectetur adipisicing elit. Culpa animi eaque nulla possimus enim?
+						Facere, nihil perferendis delectus aspernatur ea magnam iste autem!
+						Obcaecati assumenda harum itaque architecto quasi facere!
+					</p>
+					<p className="mb-4">
+						Paragraph 2 about you. Mention your key skills, technologies you
+						specialize in, and your approach to solving problems. Lorem ipsum
+						dolor, sit amet consectetur adipisicing elit. Voluptatem debitis hic
+						mollitia at praesentium molestias autem quidem ad non. Sit, dicta?
+						Sequi omnis distinctio assumenda expedita qui non, tenetur
+						similique.
+					</p>
+					<p className="mb-4">
+						Paragraph 3 about you. Share any personal qualities, achievements,
+						or values that define you. Lorem ipsum dolor sit amet consectetur
+						adipisicing elit. Asperiores minus porro adipisci est nam maxime
+						dolore beatae, iste sunt earum, quis dicta fugiat rem culpa esse
+						soluta, odio recusandae natus.
+					</p>
+					<p>
+						Paragraph 4 about you. Add anything that sets you apart as a
+						developer or team player. Lorem ipsum dolor sit amet, consectetur
+						adipisicing elit. Enim, voluptatibus, eaque blanditiis alias neque
+						saepe eveniet modi accusamus molestias eligendi quibusdam
+						accusantium sunt vero esse itaque porro unde voluptas! Tenetur!
+					</p>
+				</section>
+
+				<section id="experience" className=" mb-12 lg:mb-24">
+					<h2 className="text-2xl lg:text-3xl font-semibold mb-4">
+						Experiences
+					</h2>
+					<p className="mb-4">
+						List your professional experiences, roles, and key achievements.
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore ea,
+						itaque similique beatae facilis sapiente impedit temporibus sit
+						dignissimos debitis! Ratione odit earum perferendis pariatur harum
+						delectus provident sit aperiam.
+					</p>
+					<p>
+						Include highlights of your projects, focusing on impactful work and
+						technologies used. Lorem ipsum dolor sit amet consectetur
+						adipisicing elit. Asperiores nobis, tempore accusamus molestias
+						maxime illum perferendis accusantium cupiditate nostrum nesciunt
+						iusto. Quisquam sunt odit reiciendis vero amet neque minima aut.
+					</p>
+				</section>
+
+				<section id="project" className=" mb-12 lg:mb-24">
+					<h2 className="text-2xl lg:text-3xl font-semibold mb-4">Projects</h2>
+					<p className="mb-4">
+						List your professional experiences, roles, and key achievements.
+						Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur,
+						eum explicabo. Accusantium nisi voluptates aut exercitationem
+						deserunt error beatae ipsam asperiores suscipit, aspernatur
+						accusamus sapiente laboriosam natus voluptatibus ducimus ratione?
+					</p>
+					<p>
+						Include highlights of your projects, focusing on impactful work and
+						technologies used. Lorem ipsum dolor sit amet, consectetur
+						adipisicing elit. Autem accusantium, doloribus atque itaque ad
+						voluptatum. Veniam tempore modi molestiae obcaecati aliquid nesciunt
+						eligendi accusamus suscipit autem eveniet pariatur, placeat tempora.
+					</p>
+				</section>
+			</div>
+		</div>
+	);
 }
