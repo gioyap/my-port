@@ -125,7 +125,7 @@ export default function Portfolio() {
 
 			skills: ["Node.js", "MongoDB", "Tailwind CSS", "Next.js", "Netlify"],
 			imgSrc: "/images/rsc.png",
-			link: "https://rscgroupreservationsystem.netlify.app/",
+			// link: "#",
 		},
 		{
 			title: "Smart Plastic Bottle Bin",
@@ -217,7 +217,7 @@ export default function Portfolio() {
 					</a>
 
 					<a
-						href="www.linkedin.com/in/gio-edrian-yap-4090812ab"
+						href="https://www.linkedin.com/in/gio-edrian-yap-4090812ab"
 						target="_blank"
 						rel="noopener noreferrer"
 						className="text-white hover:text-teal-400"
@@ -359,7 +359,7 @@ export default function Portfolio() {
 						</div>
 					))}
 					<a
-						href="/resume.pdf"
+						href="/gioyapcvresume.pdf"
 						target="_blank"
 						rel="noopener noreferrer"
 						className="font-bold hover:text-teal-400 opacity-100 cursor-pointer"

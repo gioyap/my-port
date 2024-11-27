@@ -1,9 +1,7 @@
 "use client";
-import React from "react";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { IoReturnUpBack } from "react-icons/io5";
 
-// Sample project data array
 const projects = [
 	{
 		year: "2024",
@@ -26,11 +24,11 @@ const projects = [
 		title: "Reservation System",
 		company: "Forever Flawless",
 		technologies: ["Node.js", "MongoDB", "Tailwind CSS", "Next.js", "Netlify"],
-		link: "https://rscgroupreservationsystem.netlify.app/",
+		// link: "#",
 	},
 	{
-		year: "2022",
-		title: "Smart Platic Bottle Bin",
+		year: "2023",
+		title: "Smart Plastic Bottle Bin",
 		company: "Capstone Project",
 		technologies: [
 			"Node.js",
@@ -40,7 +38,7 @@ const projects = [
 			"Vercel",
 			"Shadcn",
 		],
-		link: "#",
+		link: "https://smart-bin-steel.vercel.app/",
 	},
 ];
 
@@ -48,13 +46,11 @@ const ProjectArchive = () => {
 	const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
 	useEffect(() => {
-		const handleMouseMove = (event: MouseEvent) => {
+		const handleMouseMove = (event: any) => {
 			setMousePosition({ x: event.clientX, y: event.clientY });
 		};
 
 		window.addEventListener("mousemove", handleMouseMove);
-
-		// Cleanup on unmount
 		return () => window.removeEventListener("mousemove", handleMouseMove);
 	}, []);
 
@@ -72,46 +68,80 @@ const ProjectArchive = () => {
 					zIndex: 10,
 				}}
 			/>
-			<a href="/" className=" flex gap-4 pb-4 font-bold text-teal-400">
+			<a href="/" className="flex gap-4 pb-4 font-bold text-teal-400">
 				<IoReturnUpBack size={20} />
 				Gio Yap
 			</a>
-			<h2 className="text-5xl font-bold mb-6 text-white lg:pb-14">
+			<h2 className="text-3xl lg:text-5xl font-bold mb-6 text-white lg:pb-14">
 				All Projects
 			</h2>
 			<div className="overflow-x-auto">
 				<table className="min-w-full text-white">
 					<thead>
 						<tr>
-							{["Year", "Project", "Made at", "Built with", "Link"].map(
-								(header) => (
-									<th key={header} className="p-3 text-left text-sm">
-										{header}
-									</th>
-								)
-							)}
+							{/* Conditionally show only "Year" and "Project" on mobile */}
+							<th className="p-3 text-left text-sm lg:hidden">
+								<div className="flex gap-8">
+									<span className="font-semibold">Year</span>
+									<span className="font-semibold">Project</span>
+								</div>
+							</th>
+
+							{/* Desktop View */}
+							<th className="hidden lg:table-cell p-3 text-left text-sm">
+								Year
+							</th>
+							<th className="hidden lg:table-cell p-3 text-left text-sm">
+								Project
+							</th>
+							<th className="hidden lg:table-cell p-3 text-left text-sm">
+								Made at
+							</th>
+							<th className="hidden lg:table-cell p-3 text-left text-sm">
+								Built with
+							</th>
+							<th className="hidden lg:table-cell p-3 text-left text-sm">
+								Link
+							</th>
 						</tr>
 					</thead>
+
 					<tbody>
 						{projects.map((project, index) => (
 							<tr
 								key={index}
-								className="border-b border-gray-700 transition-colors duration-200"
+								className="border-b border-gray-700 transition-colors duration-200 lg:hover:bg-gray-700 lg:hover:bg-opacity-30 cursor-pointer"
+								onClick={() => window.open(project.link, "_blank")}
 							>
-								<td className="p-3 text-sm text-gray-400">{project.year}</td>
-								<td className="p-3 font-semibold">{project.title}</td>
-								<td className="p-3 text-sm text-gray-400">{project.company}</td>
-								<td className="flex flex-wrap gap-2 py-6">
-									{project.technologies.map((skill, idx) => (
-										<span
-											key={idx}
-											className="px-2 py-1 bg-teal-700 text-teal-400 font-bold bg-opacity-30 text-xs rounded-full"
-										>
-											{skill}
-										</span>
-									))}
+								{/* Mobile and Tablet View */}
+								<td className="p-3 text-sm flex gap-8 lg:hidden">
+									<span className="font-semibold">{project.year}</span>
+									<span className=" whitespace-nowrap">{project.title}</span>
 								</td>
-								<td className="p-3 text-gray-400 underline text-sm whitespace-nowrap">
+
+								{/* Desktop View */}
+								<td className="p-3 text-sm text-gray-400 hidden lg:table-cell">
+									{project.year}
+								</td>
+								<td className="p-3 font-semibold hidden lg:table-cell">
+									{project.title}
+								</td>
+								<td className="p-3 text-sm text-gray-400 hidden lg:table-cell">
+									{project.company}
+								</td>
+								<td className="p-3 hidden lg:table-cell">
+									<div className="flex flex-wrap gap-2">
+										{project.technologies.map((skill, idx) => (
+											<span
+												key={idx}
+												className="px-2 py-1 bg-teal-700 text-teal-400 font-bold bg-opacity-30 text-xs rounded-full"
+											>
+												{skill}
+											</span>
+										))}
+									</div>
+								</td>
+								<td className="p-3 text-gray-400 underline text-sm hidden lg:table-cell whitespace-nowrap">
 									<a
 										href={project.link}
 										target="_blank"
