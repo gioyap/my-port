@@ -31,7 +31,7 @@ export default function RootLayout({
 				{/* Hire Me Button */}
 				<a
 					href="mailto:gioedrian.yap.l@gmail.com"
-					className="fixed top-4 left-4 z-50 bg-slate-900 text-white py-2 px-4 rounded-lg shadow-lg hover:bg-slate-600 transition-colors"
+					className="fixed opacity-80 top-4 right-4 z-50 bg-teal-400 text-black py-2 px-4 rounded-lg shadow-lg hover:bg-teal-600 hover:text-white transition-colors"
 				>
 					Hire Me
 				</a>
