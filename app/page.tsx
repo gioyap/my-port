@@ -125,7 +125,7 @@ export default function Portfolio() {
 
 			skills: ["Node.js", "MongoDB", "Tailwind CSS", "Next.js", "Netlify"],
 			imgSrc: "/images/rsc.png",
-			// link: "#",
+			link: "https://demorsc.netlify.app/",
 		},
 		{
 			title: "Smart Plastic Bottle Bin",

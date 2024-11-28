@@ -24,7 +24,7 @@ const projects = [
 		title: "Reservation System",
 		company: "Forever Flawless",
 		technologies: ["Node.js", "MongoDB", "Tailwind CSS", "Next.js", "Netlify"],
-		// link: "#",
+		link: "https://demorsc.netlify.app/",
 	},
 	{
 		year: "2023",
@@ -39,6 +39,13 @@ const projects = [
 			"Shadcn",
 		],
 		link: "https://smart-bin-steel.vercel.app/",
+	},
+	{
+		year: "2023",
+		title: "Blood Knight",
+		company: "Game Dev: Final Project",
+		technologies: ["Unity", "C#", "Adobe Illustrator"],
+		link: "https://drive.google.com/drive/folders/1T3m9D9qotbVgti6UioxBixAwUZbVnvQB?usp=drive_link",
 	},
 ];
 
