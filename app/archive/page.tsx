@@ -4,6 +4,24 @@ import { IoReturnUpBack } from "react-icons/io5";
 
 const projects = [
 	{
+		year: "2025",
+		title: "Online Patient Record Management System",
+		company: "Capstone project of group of student in Richwell Colleges, Inc.",
+		technologies: [
+			"Typescript",
+			"Tailwind CSS",
+			"Next.js",
+			"Vercel",
+			"Java",
+			"Spring Boot",
+			"MySQL",
+			"Google App Engine",
+			"Google Cloud SQL",
+			"Hostinger",
+		],
+		link: "https://demo-opr.vercel.app/",
+	},
+	{
 		year: "2024",
 		title: "Church Ministry Platform",
 		company: "Grace Presbyterian",
@@ -22,14 +40,14 @@ const projects = [
 	{
 		year: "2024",
 		title: "Reservation System",
-		company: "Forever Flawless",
+		company: "Forever Flawless Face and Body Clinic",
 		technologies: ["Node.js", "MongoDB", "Tailwind CSS", "Next.js", "Netlify"],
 		link: "https://demorsc.netlify.app/",
 	},
 	{
 		year: "2023",
 		title: "Smart Plastic Bottle Bin",
-		company: "Capstone Project",
+		company: "Capstone Project at BulSU: Hagonoy Campus",
 		technologies: [
 			"Node.js",
 			"MongoDB",
