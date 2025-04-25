@@ -26,7 +26,7 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body
-				className={`${geistSans.variable} ${geistMono.variable} antialiased bg-slate-950 relative lg:overflow-hidden px-6 md:px-12 lg:max-w-screen-lg xl:max-w-screen-xl 3xl:max-w-screen-2xl mx-auto`}
+				className={`${geistSans.variable} ${geistMono.variable} antialiased bg-slate-950 relative  px-6 md:px-12 lg:max-w-screen-lg xl:max-w-screen-xl 3xl:max-w-screen-2xl mx-auto`}
 			>
 				{/* Hire Me Button */}
 				<a

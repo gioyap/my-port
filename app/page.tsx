@@ -23,25 +23,6 @@ export default function Portfolio() {
 	}, []);
 
 	useEffect(() => {
-		const handleScroll = (event: WheelEvent) => {
-			// Select the scrollable container
-			const scrollContainer = document.getElementById("scrollContainer");
-			if (scrollContainer) {
-				// Adjust scroll position programmatically
-				scrollContainer.scrollTop += event.deltaY * 4;
-			}
-		};
-
-		// Attach wheel event listener to the window
-		window.addEventListener("wheel", handleScroll);
-
-		// Cleanup on unmount
-		return () => {
-			window.removeEventListener("wheel", handleScroll);
-		};
-	}, []);
-
-	useEffect(() => {
 		// Create an Intersection Observer to detect when sections are in view
 		const observer = new IntersectionObserver(
 			(entries) => {
@@ -74,18 +55,27 @@ export default function Portfolio() {
 
 	return (
 		<div className="flex flex-col lg:flex-row w-full h-screen py-16 lg:gap-x-6">
+			{/* Flashlight overlay (fixed, clipped, non-scrollable) */}
 			<div
-				className="absolute pointer-events-none rounded-full"
+				className="fixed inset-0 pointer-events-none z-10"
 				style={{
-					width: 700,
-					height: 700,
-					top: mousePosition.y - 350,
-					left: mousePosition.x - 350,
-					background:
-						"radial-gradient(circle, rgba(37, 99, 235, 0.1) 0%, rgba(15, 23, 42, 0.02) 50%, rgba(15, 23, 42, 0) 100%)",
-					zIndex: 10,
+					clipPath: "inset(0 0 0 0)",
+					overflow: "hidden",
 				}}
-			/>
+			>
+				<div
+					className="absolute rounded-full"
+					style={{
+						width: 700,
+						height: 700,
+						top: mousePosition.y - 350,
+						left: mousePosition.x - 350,
+						background:
+							"radial-gradient(circle, rgba(37, 99, 235, 0.1) 0%, rgba(15, 23, 42, 0.02) 50%, rgba(15, 23, 42, 0) 100%)",
+					}}
+				/>
+			</div>
+
 			{/* Left Side: Header Component */}
 			<div className="w-full h-full flex flex-col justify-between z-20 mb-32 opacity-80">
 				<Header activeSection={activeSection} />
@@ -94,13 +84,12 @@ export default function Portfolio() {
 			{/* Right Side: Content */}
 			<div
 				id="scrollContainer"
-				className="w-full lg:overflow-y-scroll scrollbar-hide text-white relative z-0 opacity-80"
+				className="w-full lg:overflow-y-scroll overflow-hidden scrollbar-hide text-white relative z-0 opacity-80"
 				style={{ scrollBehavior: "smooth" }}
 			>
-				{/* Content Sections */}
-				<About/>
+				<About />
 				<Experience experiences={experiences} />
-				<Project projects={projects}/>		
+				<Project projects={projects} />
 			</div>
 		</div>
 	);

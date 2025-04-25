@@ -1,5 +1,31 @@
 export const projects = [
     {
+        title: "RSC Intern Hub",
+        description: "As Project Manager and Senior Developer, I led two OJT interns in building the RSC Intern Hub. The platform allows interns to input their daily tasks, which can be exported for reporting purposes, streamlining task tracking and data management.",
+        skills: [
+            "Typescript",
+            "Tailwind CSS",
+            "Next.js",
+            "Netlify",
+            "Supabase",
+        ],
+        imgSrc: "images/intern.png",
+        link: "https://rscinternhub.netlify.app/",
+    },
+    {
+        "title": "RSC University",
+        "description": "As a Full Stack Developer, I developed the RSC University Learning Management System (LMS) for the HR department. The platform allows users to complete modules with multiple-choice and true/false questions, access learning materials through Google Slides links, and watch videos, streamlining the learning process.",
+        "skills": [
+            "Typescript",
+            "Tailwind CSS",
+            "Next.js",
+            "Netlify",
+            "Supabase"
+        ],
+        "imgSrc": "images/lms.png",
+        "link": "http://rscgroupuniversity.netlify.app/"
+    },
+    {
         title: "Online Patient Record Management System",
         description: "The Online Patient Record Management System is a web-based platform for managing radiology patient records. This system enhances efficiency, ensures secure patient data handling, and improves collaboration between radiologic technologists and doctors.",
         skills: [

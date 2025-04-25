@@ -12,42 +12,36 @@ const About: React.FC = () => {
             experience
           </span>{" "}
           focuses on creating practical solutions that address real-world
-          challenges, ensuring they are reliable, easy to use, and tailored to
-          meet organizational needs.
+          challenges, ensuring they are reliable, easy to use, and tailored to meet
+          organizational needs.
         </p>
         <p className="mb-4 p-4 lg:p-0">
-          Currently, I'm an{" "}
+          Currently, I'm a{" "}
           <span className="font-bold hover:text-teal-400 opacity-100 cursor-pointer">
-            MIS - IT Analyst and Programmer at Forever Flawless
-          </span>
-          . I develop custom projects tailored to meet the needs of various
-          departments within the head office, optimizing workflows and improving
-          internal processes. Additionally, I maintain the company’s
-          <span className="font-bold hover:text-teal-400 opacity-100 cursor-pointer">
-            {" "}
-            e-commerce website
-          </span>
-          , ensuring smooth operations and providing technical support to
-          employees when they encounter system-related challenges.
+            Jr. Programmer at Fisher Farm Inc.
+          </span>{" "}
+          While doing my job which managing and improving the operation system, I
+          develop custom projects tailored to meet the needs of various departments
+          within the head office, optimizing workflows and improving internal
+          processes.
         </p>
         <p className="mb-4 p-4 lg:p-0">
           In 2024, I graduated from{" "}
           <span className="font-bold hover:text-teal-400 opacity-100 cursor-pointer">
-            Bulacan State University - Hagonoy Campus with a major in Web and
-            Mobile Development
+            Bulacan State University - Hagonoy Campus with a major in Web and Mobile
+            Development
           </span>
-          , laying the foundation for my journey in software development. Since
-          then, I've embraced
+          , where my foundation comes from in software development. Since then, I've
+          embraced{" "}
           <span className="font-bold hover:text-teal-400 opacity-100 cursor-pointer">
-            {" "}
             continuous learning
           </span>{" "}
-          and applied my skills in real-world projects. Alongside my full-time
-          work, I've collaborated with a client on freelance projects, which has
-          further honed my expertise and deepened my commitment to delivering
-          impactful software solutions.
+          and applied my skills in real-world projects. Alongside my full-time work,
+          I've collaborated with a client on freelance projects, which has further
+          honed my expertise and deepened my commitment to delivering impactful
+          software solutions.
         </p>
-        <p className="p-4 lg:p-0">
+        {/* <p className="p-4 lg:p-0">
           Beyond work, I cherish spending quality time with my{" "}
           <span className="font-bold hover:text-teal-400 opacity-100 cursor-pointer">
             girlfriend
@@ -67,7 +61,7 @@ const About: React.FC = () => {
             connections
           </span>
           .
-        </p>
+        </p> */}
       </section>
     );
   };

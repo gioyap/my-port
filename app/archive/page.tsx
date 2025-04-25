@@ -80,19 +80,28 @@ const ProjectArchive = () => {
 	}, []);
 
 	return (
-		<section className="max-w-6xl mx-auto p-6 lg:pt-24 opacity-80">
-			<div
-				className="absolute pointer-events-none rounded-full"
-				style={{
-					width: 700,
-					height: 700,
-					top: mousePosition.y - 350,
-					left: mousePosition.x - 350,
-					background:
-						"radial-gradient(circle, rgba(37, 99, 235, 0.1) 0%, rgba(15, 23, 42, 0.02) 50%, rgba(15, 23, 42, 0) 100%)",
-					zIndex: 10,
-				}}
-			/>
+		<>
+			{/* Flashlight overlay (fixed, clipped, non-scrollable) */}
+				<div
+					className="fixed inset-0 pointer-events-none z-10"
+					style={{
+						clipPath: "inset(0 0 0 0)",
+						overflow: "hidden",
+					}}
+				>
+					<div
+						className="absolute rounded-full"
+						style={{
+							width: 700,
+							height: 700,
+							top: mousePosition.y - 350,
+							left: mousePosition.x - 350,
+							background:
+								"radial-gradient(circle, rgba(37, 99, 235, 0.1) 0%, rgba(15, 23, 42, 0.02) 50%, rgba(15, 23, 42, 0) 100%)",
+						}}
+					/>
+				</div>
+			<section className="max-w-6xl mx-auto p-6 lg:py-32 lg:pb-[10rem] opacity-80">
 			<a href="/" className="flex gap-4 pb-4 font-bold text-teal-400">
 				<IoReturnUpBack size={20} />
 				Gio Yap
@@ -181,6 +190,7 @@ const ProjectArchive = () => {
 				</table>
 			</div>
 		</section>
+		</>
 	);
 };
 
