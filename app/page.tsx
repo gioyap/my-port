@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { FaGithub, FaLinkedin, FaFacebook } from "react-icons/fa";
-
+//test deploy
 export default function Portfolio() {
 	const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 	const [activeSection, setActiveSection] = useState("about");
