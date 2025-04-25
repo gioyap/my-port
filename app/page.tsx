@@ -6,7 +6,7 @@ import Header from "./components/leftside/page";
 import About from "./components/about/page";
 import Experience from "./components/experience/page";
 import Project from "./components/project/page";
-
+//test deployv2
 export default function Portfolio() {
 	const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 	const [activeSection, setActiveSection] = useState("about");
