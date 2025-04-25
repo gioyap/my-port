@@ -1,4 +1,12 @@
-export const projects = [
+export interface ProjectItem {
+  title: string;
+  description: string;
+  link: string;
+  imgSrc: string;
+  skills: string[];
+}
+
+export const projects: ProjectItem[] = [
     {
         title: "RSC Intern Hub",
         description: "As Project Manager and Senior Developer, I led two OJT interns in building the RSC Intern Hub. The platform allows interns to input their daily tasks, which can be exported for reporting purposes, streamlining task tracking and data management.",

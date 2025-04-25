@@ -1,12 +1,6 @@
+"use client"
 import { useState } from "react";
-
-interface ProjectItem {
-  title: string;
-  description: string;
-  link: string;
-  imgSrc: string;
-  skills: string[];
-}
+import type { ProjectItem } from "@/app/data/project";
 
 interface ProjectProps {
   projects: ProjectItem[];

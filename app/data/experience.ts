@@ -1,4 +1,13 @@
-export const experiences = [
+// app/data/experience.ts
+export interface ExperienceItem {
+  title: string;
+  period: string;
+  description: string;
+  link: string;
+  skills: string[];
+}
+
+export const experiences: ExperienceItem[] = [
     {
         title: "Junior Programmer",
         period: "April / 2025 - Present",

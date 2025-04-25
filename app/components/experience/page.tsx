@@ -1,13 +1,6 @@
+"use client"
 import { useState } from "react";
-
-interface ExperienceItem {
-  title: string;
-  period: string;
-  description: string;
-  link: string;
-  skills: string[];
-}
-
+import type { ExperienceItem } from "@/app/data/experience";
 interface ExperienceProps {
   experiences: ExperienceItem[];
 }
