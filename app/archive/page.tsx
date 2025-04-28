@@ -5,6 +5,32 @@ import { IoReturnUpBack } from "react-icons/io5";
 const projects = [
 	{
 		year: "2025",
+		title: "RSC Intern Hub",
+		company: "Forever Flawless Face and Body Clinic",
+		technologies: [
+			"Typescript",
+			"Tailwind CSS",
+			"Next.js",
+			"Supabase",
+			"Netlify",
+		],
+		link: "https://rscinternhub.netlify.app"
+	},
+	{
+		year: "2025",
+		title: "RSC University",
+		company: "Forever Flawless Face and Body Clinic",
+		technologies: [
+			"Typescript",
+			"Tailwind CSS",
+			"Next.js",
+			"Supabase",
+			"Netlify",
+		],
+		link: "https://rscgroupuniversity.netlify.app"
+	},
+	{
+		year: "2025",
 		title: "Online Patient Record Management System",
 		company: "Capstone project of group of student in Richwell Colleges, Inc.",
 		technologies: [
@@ -34,6 +60,7 @@ const projects = [
 			"GoDaddy",
 			"Donorbox",
 			"Tawk.to",
+			"Aceternity UI",
 		],
 		link: "https://grace.ph/",
 	},

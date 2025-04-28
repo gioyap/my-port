@@ -147,6 +147,7 @@ export default function Portfolio() {
 				"GoDaddy",
 				"Donorbox",
 				"Tawk.to",
+				"Aceternity UI"
 			],
 			imgSrc: "/images/grace.png",
 			link: "https://grace.ph/",
