@@ -5,10 +5,7 @@ import { FaGithub, FaLinkedin, FaFacebook } from "react-icons/fa";
 export default function Portfolio() {
 	const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 	const [activeSection, setActiveSection] = useState("about");
-	const [hoveredExperience, sethoveredExperience] = useState<number | null>(
-		null
-	);
-	const [hoveredProject, setHoveredProject] = useState<number | null>(null);
+	
 	useEffect(() => {
 		const handleMouseMove = (event: MouseEvent) => {
 			setMousePosition({ x: event.clientX, y: event.clientY });
@@ -280,15 +277,9 @@ export default function Portfolio() {
 						<FaLinkedin size={24} />
 					</a>
 
-					<a
-						href="https://www.facebook.com/gio.0610/"
-						target="_blank"
-						rel="noopener noreferrer"
-						className="text-white hover:text-teal-400"
-					>
-						<FaFacebook size={24} />
-					</a>
-				</div>
+			{/* Left Side: Header Component */}
+			<div className="w-full h-full flex flex-col justify-between z-20 mb-32 opacity-80">
+				<Header activeSection={activeSection} />
 			</div>
 
 			{/* Right Side: Content */}
