@@ -3,6 +3,46 @@ import React, { useEffect, useState } from "react";
 import { IoReturnUpBack } from "react-icons/io5";
 
 const projects = [
+		{
+		year: "2025",
+		title: "Plant Performance Management System",
+		company: "Fisherfarms Inc.",
+		technologies: [
+					"Synology NAS DSM",
+					"Docker - Container Manager",
+					"Typescript",
+					"Tailwind CSS",
+					"Next.js",
+					"Supabase",
+		],
+		link: "https://demoplantperformance.netlify.app"
+	},
+	{
+		year: "2025",
+		title: "RSC Intern Hub",
+		company: "Forever Flawless Face and Body Clinic",
+		technologies: [
+			"Typescript",
+			"Tailwind CSS",
+			"Next.js",
+			"Supabase",
+			"Netlify",
+		],
+		link: "https://rscinternhub.netlify.app"
+	},
+	{
+		year: "2025",
+		title: "RSC University",
+		company: "Forever Flawless Face and Body Clinic",
+		technologies: [
+			"Typescript",
+			"Tailwind CSS",
+			"Next.js",
+			"Supabase",
+			"Netlify",
+		],
+		link: "https://rscgroupuniversity.netlify.app"
+	},
 	{
 		year: "2025",
 		title: "Online Patient Record Management System",
@@ -34,6 +74,7 @@ const projects = [
 			"GoDaddy",
 			"Donorbox",
 			"Tawk.to",
+			"Aceternity UI",
 		],
 		link: "https://grace.ph/",
 	},
