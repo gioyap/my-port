@@ -31,7 +31,7 @@ export default function Portfolio() {
 				});
 			},
 			{
-				threshold: 0.5, // Trigger when 50% of the section is in view
+				threshold: 0.25, // Trigger when 50% of the section is in view
 			}
 		);
 
@@ -53,20 +53,19 @@ export default function Portfolio() {
 
 	const experiences = [
 		{
-			title: "Junior Programmer",
+			title: "Jr. Programmer",
 			period: "April / 2025 - Present",
 			description:
 					"Responsible for managing and improving the company's Inventory Management System (IMS), regularly performing updates and enhancements to ensure efficiency. Also involved in developing small-scale internal projects to support the head office operations, while maintaining web accessibility standards across UI components.",
-			skills: ["PHP", "Javascript", "HTML", "CSS", "Excel", "VBA", "MySQL"],
+			skills: ["PHP", "Javascript", "HTML", "CSS", "MySQL", "Supabase", "Next.js"],
 			link: "https://fisherfarms.ph/",
 	},
 		{
 			title: "MIS-IT Analyst and Programmer",
-			period: "May / 2024 - Present",
+			period: "May / 2024 - March / 2025",
 			description:
 				"Responsible for contributing to the creation and maintenance of UI components with a focus on web accessibility. In addition to this, manage the company's e-commerce website using Shopify, ensuring the timely updates of banners, product images, and applying promotional discounts when necessary.",
-			skills: ["PHP", "Javascript", "HTML", "CSS", "Shopify"],
-			link: "https://flawless.com.ph/",
+			skills: ["WordPress", "PHP", "Javascript", "HTML", "CSS", "Shopify"],
 		},
 		{
 			title: "Internship Junior Software Developer",
@@ -90,6 +89,20 @@ export default function Portfolio() {
 	];
 
 	const projects = [
+		{
+			title: "Plant Performance Management System",
+			description: "A comprehensive system designed to monitor and manage the performance of productions. This platform enables real-time tracking of key performance indicators (KPIs), facilitates data-driven decision-making, and supports operational efficiency.",
+			skills: [
+					"Synology NAS DSM",
+					"Docker - Container Manager",
+					"Typescript",
+					"Tailwind CSS",
+					"Next.js",
+					"Supabase",
+			],
+			imgSrc: "images/ppms.png",
+			link: "https://demoplantperformance.netlify.app"
+	},
 		{
 			title: "RSC Intern Hub",
 			description: "As Project Manager and Senior Developer, I led two OJT interns in building the RSC Intern Hub. The platform allows interns to input their daily tasks, which can be exported for reporting purposes, streamlining task tracking and data management.",

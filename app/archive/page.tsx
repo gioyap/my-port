@@ -3,6 +3,20 @@ import React, { useEffect, useState } from "react";
 import { IoReturnUpBack } from "react-icons/io5";
 
 const projects = [
+		{
+		year: "2025",
+		title: "Plant Performance Management System",
+		company: "Fisherfarms Inc.",
+		technologies: [
+					"Synology NAS DSM",
+					"Docker - Container Manager",
+					"Typescript",
+					"Tailwind CSS",
+					"Next.js",
+					"Supabase",
+		],
+		link: "https://demoplantperformance.netlify.app"
+	},
 	{
 		year: "2025",
 		title: "RSC Intern Hub",
