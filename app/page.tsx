@@ -387,7 +387,7 @@ export default function Portfolio() {
 						</div>
 					))}
 					<a
-						href="/gioyapcvresume.pdf"
+						href="/GYapCV2026.pdf"
 						target="_blank"
 						rel="noopener noreferrer"
 						className="font-bold hover:text-teal-400 opacity-100 cursor-pointer"
