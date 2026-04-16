@@ -1,6 +1,6 @@
 import Image from "next/image";
 import type { PointerEvent as ReactPointerEvent, ReactNode } from "react";
-import { FaApple, FaTerminal } from "react-icons/fa";
+import { FaApple } from "react-icons/fa";
 import type { IconType } from "react-icons";
 import { formatClock, formatMenuDate } from "./utils";
 import type { WindowState } from "./types";
@@ -10,7 +10,7 @@ export function Wallpaper() {
 		<>
 			<div className="fixed inset-0 -z-30">
 				<Image
-					src="/images/macdesktop.jpg"
+					src="/images/desktopwp.jpg"
 					alt=""
 					fill
 					priority
@@ -93,6 +93,27 @@ export function StickyNote({
 			<p className="text-xs font-semibold uppercase tracking-[0.18em]">{title}</p>
 			<p className="mt-3 text-sm font-medium leading-6">{body}</p>
 		</article>
+	);
+}
+
+export function PhotosPreview({
+	photoSrc,
+	onClick,
+}: {
+	photoSrc: string;
+	onClick: () => void;
+}) {
+	return (
+		<button
+			type="button"
+			onClick={onClick}
+			className="pointer-events-auto w-[260px] overflow-hidden rounded-[26px] border border-white/20 bg-white/15 text-left shadow-[0_24px_40px_rgba(0,0,0,0.28)] backdrop-blur-2xl transition hover:scale-[1.02] hidden md:block"
+		>
+			<div className="relative h-[240px] w-full">
+				<Image src={photoSrc} alt="" fill className="object-cover" />
+				<div className="absolute inset-0 bg-[linear-gradient(180deg,transparent,rgba(15,23,42,0.58))]" />
+			</div>
+		</button>
 	);
 }
 

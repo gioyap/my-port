@@ -3,6 +3,7 @@ import {
 	FaFilePdf,
 	FaGithub,
 	FaGraduationCap,
+	FaImages,
 	FaSpotify,
 	FaTerminal,
 	FaUser,
@@ -14,6 +15,40 @@ export const githubUrl = "https://github.com/gioyap";
 export const resumeUrl = "/GYapCV2026.pdf";
 export const localAudioTrackUrl = "/audio/portfolio-song.mp3";
 export const animationMs = 220;
+export const photosRotationMs = 3500;
+
+export const photos = [
+	{
+		src: "/images/me.JPG",
+	},
+	{
+		src: "/images/me2.JPG",
+	},
+	{
+		src: "/images/me3.JPG",
+	},
+	{
+		src: "/images/me4.JPG",
+	},
+	{
+		src: "/images/IMG_0130.JPG",
+	},
+	{
+		src: "/images/IMG_0137.JPG",
+	},
+	{
+		src: "/images/IMG_0405.JPG",
+	},
+		{
+		src: "/images/IMG_4344.JPG",
+	},
+	{
+		src: "/images/IMG_4372.jpg",
+	},
+	{
+		src: "/images/IMG_4373.JPG",
+	},
+];
 
 export const notes = [
 	{
@@ -118,10 +153,19 @@ export const desktopApps: Array<{
 			"border-emerald-200/40 bg-[linear-gradient(180deg,rgba(34,197,94,0.96),rgba(22,101,52,0.98))]",
 		onActivate: "spotify",
 	},
+	{
+		label: "Photos.app",
+		icon: FaImages,
+		iconClass: "text-white",
+		tileClass:
+			"border-cyan-200/40 bg-[linear-gradient(180deg,rgba(56,189,248,0.96),rgba(37,99,235,0.98))]",
+		onActivate: "photos",
+	},
 ];
 
 export const initialWindows: Record<WindowKey, WindowState> = {
 	terminal: { visible: true, open: true, x: 70, y: 48, z: 30 },
 	resume: { visible: false, open: false, x: 460, y: 118, z: 20 },
 	spotify: { visible: false, open: false, x: 980, y: 140, z: 10 },
+	photos: { visible: false, open: false, x: 700, y: 110, z: 15 },
 };

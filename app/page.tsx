@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, PointerEvent as ReactPointerEvent, useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { FaApple, FaDownload, FaGithub, FaSpotify, FaTerminal, FaFilePdf } from "react-icons/fa";
 import {
 	animationMs,
@@ -10,6 +11,8 @@ import {
 	initialWindows,
 	localAudioTrackUrl,
 	notes,
+	photos,
+	photosRotationMs,
 	resumeUrl,
 	terminalShortcutCommands,
 } from "./desktop/config";
@@ -19,6 +22,7 @@ import {
 	DesktopWindow,
 	DockButton,
 	HomeScreen,
+	PhotosPreview,
 	StickyNote,
 	Wallpaper,
 } from "./desktop/components";
@@ -33,6 +37,8 @@ export default function PortfolioDesktop() {
 	const [clock, setClock] = useState(new Date());
 	const [windows, setWindows] = useState(initialWindows);
 	const [dragState, setDragState] = useState<DragState | null>(null);
+	const [activePhotoIndex, setActivePhotoIndex] = useState(0);
+	const [selectedPhotoIndex, setSelectedPhotoIndex] = useState<number | null>(null);
 
 	const desktopRef = useRef<HTMLDivElement | null>(null);
 	const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -90,6 +96,14 @@ export default function PortfolioDesktop() {
 		}
 		audioRef.current.play().catch(() => {});
 	}, [windows.spotify.visible, windows.spotify.open]);
+
+	useEffect(() => {
+		if (photos.length <= 1) return;
+		const timer = window.setInterval(() => {
+			setActivePhotoIndex((current) => (current + 1) % photos.length);
+		}, photosRotationMs);
+		return () => window.clearInterval(timer);
+	}, []);
 
 	const lastCommand = history.at(-1)?.command;
 	const terminalTitle = lastCommand ? `terminal | ${lastCommand}` : "terminal";
@@ -167,6 +181,7 @@ export default function PortfolioDesktop() {
 		if (known === "github") window.open(githubUrl, "_blank", "noopener,noreferrer");
 		if (known === "resume") openWindow("resume");
 		if (known === "spotify") openWindow("spotify");
+		if (known === "help") openWindow("terminal");
 		if (known !== "github") openWindow("terminal");
 
 		setHistory((current) => [
@@ -221,20 +236,29 @@ export default function PortfolioDesktop() {
 										if (app.onActivate === "resume") openWindow("resume");
 										if (app.onActivate === "github") runCommand("github");
 										if (app.onActivate === "spotify") openWindow("spotify");
+										if (app.onActivate === "photos") openWindow("photos");
 									}}
 								/>
 							))}
 						</div>
 
-						<div className="pointer-events-none absolute right-3 top-12 z-[12] grid w-[260px] gap-4 md:right-6 md:top-14">
-							{notes.map((note) => (
-								<StickyNote
-									key={note.title}
-									title={note.title}
-									body={note.body}
-									tone={note.tone}
+						<div className="absolute right-3 top-12 z-[12] grid grid-cols-[260px_260px] gap-4 md:right-6 md:top-14">
+							<div>
+								<PhotosPreview
+									photoSrc={photos[activePhotoIndex].src}
+									onClick={() => openWindow("photos")}
 								/>
-							))}
+							</div>
+							<div className="grid gap-4">
+								{notes.map((note) => (
+									<StickyNote
+										key={note.title}
+										title={note.title}
+										body={note.body}
+										tone={note.tone}
+									/>
+								))}
+							</div>
 						</div>
 
 						{windows.terminal.visible ? (
@@ -342,6 +366,40 @@ export default function PortfolioDesktop() {
 									</div>
 								</div>
 							</DesktopWindow>
+							) : null}
+
+						{windows.photos.visible ? (
+							<DesktopWindow
+								title="photo library"
+								windowState={windows.photos}
+								widthClass="w-[min(92vw,760px)]"
+								light
+								onFocus={() => bringToFront("photos")}
+								onClose={() => closeWindow("photos")}
+								onPointerDownHeader={(event) => beginDrag("photos", event)}
+							>
+								<div className="max-h-[70vh] overflow-y-auto bg-[#eff3f8] p-4">
+									<div className="grid grid-cols-2 gap-4 md:grid-cols-3">
+										{photos.map((photo, index) => (
+											<button
+												key={photo.src}
+												type="button"
+												onClick={() => setSelectedPhotoIndex(index)}
+												className="overflow-hidden rounded-[20px] border border-slate-300 bg-white text-left shadow-sm transition hover:scale-[1.02]"
+											>
+												<div className="relative h-40 w-full">
+													<Image
+														src={photo.src}
+														alt=""
+														fill
+														className="object-cover"
+													/>
+												</div>
+											</button>
+										))}
+									</div>
+								</div>
+							</DesktopWindow>
 						) : null}
 
 						{windows.spotify.visible ? (
@@ -428,6 +486,26 @@ export default function PortfolioDesktop() {
 							/>
 						</div>
 					</nav>
+
+					{selectedPhotoIndex !== null ? (
+						<button
+							type="button"
+							onClick={() => setSelectedPhotoIndex(null)}
+							className="fixed inset-0 z-[160] grid place-items-center bg-black/70 p-6 backdrop-blur-sm"
+						>
+							<div
+								className="relative h-[80vh] w-full max-w-5xl overflow-hidden rounded-[30px] border border-white/20 bg-black shadow-[0_40px_90px_rgba(0,0,0,0.45)]"
+								onClick={(event) => event.stopPropagation()}
+							>
+								<Image
+									src={photos[selectedPhotoIndex].src}
+									alt=""
+									fill
+									className="object-contain"
+								/>
+							</div>
+						</button>
+					) : null}
 				</>
 			) : null}
 		</main>

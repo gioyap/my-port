@@ -8,7 +8,7 @@ export type CommandKey =
 	| "github"
 	| "spotify";
 
-export type WindowKey = "terminal" | "resume" | "spotify";
+export type WindowKey = "terminal" | "resume" | "spotify" | "photos";
 export type Stage = "boot" | "home" | "desktop";
 
 export type HistoryItem = {
