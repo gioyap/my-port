@@ -12,7 +12,7 @@ import type { IconType } from "react-icons";
 import type { CommandKey, WindowKey, WindowState } from "./types";
 
 export const githubUrl = "https://github.com/gioyap";
-export const resumeUrl = "/GYapCV2026.pdf";
+export const resumeUrl = "/Dev_GYap26.pdf";
 export const localAudioTrackUrl = "/audio/portfolio-song.mp3";
 export const animationMs = 220;
 export const photosRotationMs = 3500;
