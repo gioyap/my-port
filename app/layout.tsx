@@ -14,8 +14,9 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-	title: "Gio Yap",
-	description: "My Portfolio",
+	title: "Gio Yap | Full-Stack Developer",
+	description:
+		"Full-stack developer building internal tools, dashboards, workflow systems, and business applications with Next.js, TypeScript, PHP, SQL, and Supabase.",
 };
 
 export default function RootLayout({
@@ -28,14 +29,6 @@ export default function RootLayout({
 			<body
 				className={`${geistSans.variable} ${geistMono.variable} antialiased bg-slate-950 relative  px-6 md:px-12 lg:max-w-screen-lg xl:max-w-screen-xl 3xl:max-w-screen-2xl mx-auto`}
 			>
-				{/* Hire Me Button */}
-				<a
-					href="mailto:gioedrian.yap.l@gmail.com"
-					className="fixed opacity-80 top-4 right-4 z-50 bg-teal-400 text-black py-2 px-4 rounded-lg shadow-lg hover:bg-teal-600 hover:text-white transition-colors"
-				>
-					Hire Me
-				</a>
-
 				{/* Main Content */}
 				{children}
 			</body>

@@ -1,454 +1,440 @@
 "use client";
+
 import { useEffect, useState } from "react";
-import { FaGithub, FaLinkedin, FaFacebook } from "react-icons/fa";
-//test deploy
+import {
+	FaEnvelope,
+	FaExternalLinkAlt,
+	FaGithub,
+	FaLinkedin,
+} from "react-icons/fa";
+
+type Experience = {
+	title: string;
+	company: string;
+	period: string;
+	description: string;
+	skills: string[];
+	link?: string;
+};
+
+type Project = {
+	title: string;
+	description: string;
+	outcome: string;
+	role: string;
+	skills: string[];
+	imgSrc: string;
+	link: string;
+};
+
+const experiences: Experience[] = [
+	{
+		title: "Jr. Programmer",
+		company: "Fisher Farms Inc.",
+		period: "April 2025 - Present",
+		description:
+			"Own updates and improvements for internal operations systems, including inventory workflows and department-specific tools for head office teams.",
+		skills: ["PHP", "JavaScript", "HTML", "CSS", "MySQL", "Supabase", "Next.js"],
+		link: "https://fisherfarms.ph/",
+	},
+	{
+		title: "MIS-IT Analyst and Programmer",
+		company: "Forever Flawless",
+		period: "May 2024 - March 2025",
+		description:
+			"Maintained business-critical web assets, supported e-commerce updates, and built UI improvements across internal and customer-facing systems.",
+		skills: ["WordPress", "PHP", "JavaScript", "HTML", "CSS", "Shopify"],
+	},
+	{
+		title: "Junior Software Developer Intern",
+		company: "Itemcount",
+		period: "January 2024 - May 2024",
+		description:
+			"Contributed to QA, bug fixes, and feature improvements while working with a modern product stack and production development practices.",
+		skills: [
+			"Next.js",
+			"Docker",
+			"TypeScript",
+			"Tailwind CSS",
+			"MongoDB",
+			"GraphQL",
+			"React Native",
+			"Kafka",
+		],
+		link: "https://www.itemcount.io/",
+	},
+];
+
+const projects: Project[] = [
+	{
+		title: "Plant Performance Management System",
+		description:
+			"Production monitoring platform for tracking plant performance indicators and supporting data-driven operational decisions.",
+		outcome: "Built for real-time operational visibility",
+		role: "Full-stack developer",
+		skills: [
+			"Synology NAS DSM",
+			"Docker",
+			"TypeScript",
+			"Tailwind CSS",
+			"Next.js",
+			"Supabase",
+		],
+		imgSrc: "/images/ppms.png",
+		link: "https://demoplantperformance.netlify.app",
+	},
+	{
+		title: "RSC Intern Hub",
+		description:
+			"Internal reporting tool where interns log daily tasks and export reports, reducing manual tracking for supervisors.",
+		outcome: "Led two interns from planning to delivery",
+		role: "Project manager and senior developer",
+		skills: ["TypeScript", "Tailwind CSS", "Next.js", "Netlify", "Supabase"],
+		imgSrc: "/images/intern.png",
+		link: "https://rscinternhub.netlify.app/",
+	},
+	{
+		title: "RSC University",
+		description:
+			"Learning management system for HR with modules, quizzes, Google Slides materials, and video-based learning content.",
+		outcome: "Delivered a custom LMS for company training",
+		role: "Full-stack developer",
+		skills: ["TypeScript", "Tailwind CSS", "Next.js", "Netlify", "Supabase"],
+		imgSrc: "/images/lms.png",
+		link: "https://rscgroupuniversity.netlify.app/",
+	},
+	{
+		title: "Online Patient Record Management System",
+		description:
+			"Radiology record management platform for secure patient data handling and smoother collaboration between staff and doctors.",
+		outcome: "Combined Next.js frontend with Java backend services",
+		role: "Full-stack developer",
+		skills: [
+			"TypeScript",
+			"Next.js",
+			"Java",
+			"Spring Boot",
+			"MySQL",
+			"Google Cloud",
+		],
+		imgSrc: "/images/oprms.png",
+		link: "https://demo-opr.vercel.app/",
+	},
+];
+
+const stats = [
+	{ value: "2+", label: "years building for real teams" },
+	{ value: "8+", label: "shipped web projects" },
+	{ value: "3", label: "companies supported" },
+];
+
 export default function Portfolio() {
 	const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 	const [activeSection, setActiveSection] = useState("about");
-	const [hoveredExperience, sethoveredExperience] = useState<number | null>(
+	const [hoveredExperience, setHoveredExperience] = useState<number | null>(
 		null
 	);
 	const [hoveredProject, setHoveredProject] = useState<number | null>(null);
+
 	useEffect(() => {
 		const handleMouseMove = (event: MouseEvent) => {
 			setMousePosition({ x: event.clientX, y: event.clientY });
 		};
 
 		window.addEventListener("mousemove", handleMouseMove);
-
-		// Cleanup on unmount
 		return () => window.removeEventListener("mousemove", handleMouseMove);
 	}, []);
 
 	useEffect(() => {
-		// Create an Intersection Observer to detect when sections are in view
 		const observer = new IntersectionObserver(
 			(entries) => {
 				entries.forEach((entry) => {
-					if (entry.isIntersecting) {
-						setActiveSection(entry.target.id); // Update active section
-					}
+					if (entry.isIntersecting) setActiveSection(entry.target.id);
 				});
 			},
-			{
-				threshold: 0.25, // Trigger when 50% of the section is in view
-			}
+			{ rootMargin: "-35% 0px -55% 0px", threshold: 0 }
 		);
 
-		// Observe the sections
 		const sections = ["about", "experience", "project"];
 		sections.forEach((section) => {
 			const element = document.getElementById(section);
 			if (element) observer.observe(element);
 		});
 
-		// Cleanup on unmount
-		return () => {
-			sections.forEach((section) => {
-				const element = document.getElementById(section);
-				if (element) observer.unobserve(element);
-			});
-		};
+		return () => observer.disconnect();
 	}, []);
 
-	const experiences = [
-		{
-			title: "Jr. Programmer",
-			period: "April / 2025 - Present",
-			description:
-					"Responsible for managing and improving the company's Inventory Management System (IMS), regularly performing updates and enhancements to ensure efficiency. Also involved in developing small-scale internal projects to support the head office operations, while maintaining web accessibility standards across UI components.",
-			skills: ["PHP", "Javascript", "HTML", "CSS", "MySQL", "Supabase", "Next.js"],
-			link: "https://fisherfarms.ph/",
-	},
-		{
-			title: "MIS-IT Analyst and Programmer",
-			period: "May / 2024 - March / 2025",
-			description:
-				"Responsible for contributing to the creation and maintenance of UI components with a focus on web accessibility. In addition to this, manage the company's e-commerce website using Shopify, ensuring the timely updates of banners, product images, and applying promotional discounts when necessary.",
-			skills: ["WordPress", "PHP", "Javascript", "HTML", "CSS", "Shopify"],
-		},
-		{
-			title: "Internship Junior Software Developer",
-			period: "Jan / 2024 - May / 2024",
-			description:
-				"Gained hands-on experience with a wide range of technologies, fueling a passion for continuous learning. Focused on QA testing, bug fixing, and contributing to website improvements to enhance performance and functionality.",
-			skills: [
-				"Next.js",
-				"Docker",
-				"Typescript",
-				"Tailwind CSS",
-				"MongoDB",
-				"GraphQL",
-				"React Native",
-				"Expo Go",
-				"Kafka",
-				"Temporal",
-			],
-			link: "https://www.itemcount.io/",
-		},
-	];
-
-	const projects = [
-		{
-			title: "Plant Performance Management System",
-			description: "A comprehensive system designed to monitor and manage the performance of productions. This platform enables real-time tracking of key performance indicators (KPIs), facilitates data-driven decision-making, and supports operational efficiency.",
-			skills: [
-					"Synology NAS DSM",
-					"Docker - Container Manager",
-					"Typescript",
-					"Tailwind CSS",
-					"Next.js",
-					"Supabase",
-			],
-			imgSrc: "images/ppms.png",
-			link: "https://demoplantperformance.netlify.app"
-	},
-		{
-			title: "RSC Intern Hub",
-			description: "As Project Manager and Senior Developer, I led two OJT interns in building the RSC Intern Hub. The platform allows interns to input their daily tasks, which can be exported for reporting purposes, streamlining task tracking and data management.",
-			skills: [
-					"Typescript",
-					"Tailwind CSS",
-					"Next.js",
-					"Netlify",
-					"Supabase",
-			],
-			imgSrc: "images/intern.png",
-			link: "https://rscinternhub.netlify.app/",
-	},
-	{
-			"title": "RSC University",
-			"description": "As a Full Stack Developer, I developed the RSC University Learning Management System (LMS) for the HR department. The platform allows users to complete modules with multiple-choice and true/false questions, access learning materials through Google Slides links, and watch videos, streamlining the learning process.",
-			"skills": [
-					"Typescript",
-					"Tailwind CSS",
-					"Next.js",
-					"Netlify",
-					"Supabase"
-			],
-			"imgSrc": "images/lms.png",
-			"link": "http://rscgroupuniversity.netlify.app/"
-	},
-		{
-			title: "Online Patient Record Management System",
-			description: "The Online Patient Record Management System is a web-based platform for managing radiology patient records. This system enhances efficiency, ensures secure patient data handling, and improves collaboration between radiologic technologists and doctors.",
-			skills: [
-				"Typescript",
-				"Tailwind CSS",
-				"Next.js",
-				"Vercel",
-				"Java",
-				"Spring Boot",
-				"MySQL",
-				"Google App Engine",
-				"Google Cloud SQL",
-				"Hostinger",
-			],
-			imgSrc: "images/oprms.png",
-			link: "https://demo-opr.vercel.app/",
-		},
-		{
-			title: "Church Ministry Platform",
-			description:
-				"An official website for a Presbyterian church designed to connect the community. It features donation support, detailed branch information, leadership profiles, event announcements, and an 'About Us' section, ensuring easy access to essential church resources.",
-			skills: [
-				"Typescript",
-				"Tailwind CSS",
-				"Next.js",
-				"Supabase",
-				"Netlify",
-				"GoDaddy",
-				"Donorbox",
-				"Tawk.to",
-				"Aceternity UI"
-			],
-			imgSrc: "/images/grace.png",
-			link: "https://grace.ph/",
-		},
-		{
-			title: "Reservation System",
-			description:
-				"A room reservation system for Flawless head office, streamlining the process of booking meeting rooms. Employees can easily reserve rooms, view current bookings, and ensure smooth scheduling. The admin panel allows administrators to manage reservations by accepting or denying requests, enhancing operational efficiency.",
-
-			skills: ["Node.js", "MongoDB", "Tailwind CSS", "Next.js", "Netlify"],
-			imgSrc: "/images/rsc.png",
-			link: "https://demorsc.netlify.app/",
-		},
-		// {
-		// 	title: "Smart Plastic Bottle Bin",
-		// 	description:
-		// 		"A capstone project designed to promote environmental awareness on campus by encouraging students to recycle plastic bottles. The smart bin rewards students with tokens for each bottle deposited, which can be converted into recitation grades with professor discretion. Developed with guidance from academic advisors, the system aims to blend sustainability with educational incentives.",
-
-		// 	skills: [
-		// 		"Node.js",
-		// 		"MongoDB",
-		// 		"Tailwind CSS",
-		// 		"Next.js",
-		// 		"Vercel",
-		// 		"Shadcn",
-		// 	],
-		// 	imgSrc: "/images/bin.png",
-		// 	link: "https://smart-bin-steel.vercel.app/",
-		// },
-	];
-
 	return (
-		<div className="flex flex-col lg:flex-row w-full h-screen py-16 lg:gap-x-6">
-						{/* Flashlight overlay (fixed, clipped, non-scrollable) */}
-			<div
-				className="fixed inset-0 pointer-events-none z-10"
-				style={{
-					clipPath: "inset(0 0 0 0)",
-					overflow: "hidden",
-				}}
-			>
+		<main className="relative flex min-h-screen flex-col gap-16 py-20 text-slate-200 lg:flex-row lg:gap-20 lg:py-24">
+			<div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
 				<div
 					className="absolute rounded-full"
 					style={{
-						width: 700,
-						height: 700,
-						top: mousePosition.y - 350,
-						left: mousePosition.x - 350,
+						width: 720,
+						height: 720,
+						top: mousePosition.y - 360,
+						left: mousePosition.x - 360,
 						background:
-							"radial-gradient(circle, rgba(37, 99, 235, 0.1) 0%, rgba(15, 23, 42, 0.02) 50%, rgba(15, 23, 42, 0) 100%)",
+							"radial-gradient(circle, rgba(20, 184, 166, 0.12) 0%, rgba(15, 23, 42, 0.04) 45%, rgba(15, 23, 42, 0) 72%)",
 					}}
 				/>
 			</div>
-			{/* Left Side: Header Component */}
-			<div className="w-full h-full flex flex-col justify-between z-20 mb-32 opacity-80">
-				<div className="flex flex-col items-start text-white h-full mb-12">
-					<h1 className=" text-4xl font-bold mb-4">Gio Edrian L. Yap</h1>
-					<h2 className=" text-2xl font-medium mb-4">Full Stack Developer</h2>
-					<p className="text-base lg:text-lg mb-4 opacity-60">
-						Full-stack developer crafting efficient, user-centric systems with
-						real-world impact.
+
+			<header className="relative z-10 lg:sticky lg:top-24 lg:flex lg:h-[calc(100vh-12rem)] lg:w-[42%] lg:flex-col lg:justify-between">
+				<div>
+					<p className="mb-5 inline-flex rounded-full border border-teal-300/30 bg-teal-300/10 px-3 py-1 text-sm font-semibold text-teal-200">
+						Open to remote full-stack roles
+					</p>
+					<h1 className="max-w-2xl text-4xl font-bold tracking-normal text-white sm:text-5xl">
+						Gio Edrian L. Yap
+					</h1>
+					<h2 className="mt-4 text-xl font-semibold text-slate-100 sm:text-2xl">
+						Full-stack developer for internal tools, dashboards, and business
+						workflow systems.
+					</h2>
+					<p className="mt-5 max-w-xl text-base leading-7 text-slate-400">
+						I build practical web applications for teams that need cleaner
+						operations: inventory systems, LMS platforms, reporting tools,
+						reservation flows, and production dashboards.
 					</p>
 
-					{/* Vertical Links */}
-					<ul className="space-y-4 mt-8 hidden lg:block">
-						<li>
-							<a
-								href="#about"
-								className={`hover:text-teal-400 ${
-									activeSection === "about" ? "text-teal-400 font-bold" : ""
-								}`}
-							>
-								About
-							</a>
-						</li>
-						<li>
-							<a
-								href="#experience"
-								className={`hover:text-teal-400 ${
-									activeSection === "experience"
-										? "text-teal-400 font-bold"
-										: ""
-								}`}
-							>
-								Experience
-							</a>
-						</li>
-						<li>
-							<a
-								href="#project"
-								className={`hover:text-teal-400 ${
-									activeSection === "project" ? "text-teal-400 font-bold" : ""
-								}`}
-							>
-								Project
-							</a>
-						</li>
-					</ul>
+					<div className="mt-8 flex flex-wrap gap-3">
+						<a
+							href="mailto:gioedrian.yap.l@gmail.com"
+							className="inline-flex items-center gap-2 rounded-md bg-teal-300 px-4 py-3 text-sm font-bold text-slate-950 transition hover:bg-teal-200"
+						>
+							<FaEnvelope aria-hidden="true" />
+							Contact Me
+						</a>
+						<a
+							href="/GYapCV2026.pdf"
+							target="_blank"
+							rel="noopener noreferrer"
+							className="inline-flex items-center gap-2 rounded-md border border-slate-600 px-4 py-3 text-sm font-bold text-white transition hover:border-teal-300 hover:text-teal-200"
+						>
+							View Resume
+							<FaExternalLinkAlt aria-hidden="true" className="text-xs" />
+						</a>
+					</div>
+
+					<nav className="mt-12 hidden lg:block" aria-label="Section navigation">
+						<ul className="space-y-4 text-sm font-bold uppercase tracking-[0.16em]">
+							{["about", "experience", "project"].map((section) => (
+								<li key={section}>
+									<a
+										href={`#${section}`}
+										className={`group flex items-center gap-4 transition hover:text-teal-300 ${
+											activeSection === section
+												? "text-teal-300"
+												: "text-slate-500"
+										}`}
+									>
+										<span
+											className={`h-px transition-all ${
+												activeSection === section
+													? "w-12 bg-teal-300"
+													: "w-6 bg-slate-600 group-hover:w-12 group-hover:bg-teal-300"
+											}`}
+										/>
+										{section === "project" ? "Projects" : section}
+									</a>
+								</li>
+							))}
+						</ul>
+					</nav>
 				</div>
-				{/* Social Media Links */}
-				<div className="flex space-x-6">
+
+				<div className="mt-10 flex gap-5">
 					<a
 						href="https://github.com/gioyap"
 						target="_blank"
 						rel="noopener noreferrer"
-						className="text-white hover:text-teal-400"
+						aria-label="GitHub profile"
+						className="text-slate-400 transition hover:text-teal-300"
 					>
 						<FaGithub size={24} />
 					</a>
-
 					<a
 						href="https://www.linkedin.com/in/gio-edrian-yap-4090812ab"
 						target="_blank"
 						rel="noopener noreferrer"
-						className="text-white hover:text-teal-400"
+						aria-label="LinkedIn profile"
+						className="text-slate-400 transition hover:text-teal-300"
 					>
 						<FaLinkedin size={24} />
 					</a>
-
-					<a
-						href="https://www.facebook.com/gio.0610/"
-						target="_blank"
-						rel="noopener noreferrer"
-						className="text-white hover:text-teal-400"
-					>
-						<FaFacebook size={24} />
-					</a>
 				</div>
-			</div>
+			</header>
 
-			{/* Right Side: Content */}
-			<div
-				id="scrollContainer"
-				className="w-full lg:overflow-y-scroll scrollbar-hide text-white relative z-0 opacity-80"
-				style={{ scrollBehavior: "smooth" }}
-			>
-				{/* Content Sections */}
-				<section id="about" className="mb-24 lg:mb-36 lg:p-4">
-				<h1 className="lg:hidden text-teal-400 font-bold pb-4 uppercase text-xl">
-					About
-				</h1>
-				<p className="mb-4 p-4 lg:p-0">
-					I'm a dedicated developer passionate about building efficient,
-					user-friendly systems that support business operations and improve
-					employee workflows. My{" "}
-					<span className="font-bold hover:text-teal-400 opacity-100 cursor-pointer">
-						experience
-					</span>{" "}
-					focuses on creating practical solutions that address real-world
-					challenges, ensuring they are reliable, easy to use, and tailored to meet
-					organizational needs.
-				</p>
-				<p className="mb-4 p-4 lg:p-0">
-					Currently, I'm a{" "}
-					<span className="font-bold hover:text-teal-400 opacity-100 cursor-pointer">
-						Jr. Programmer at Fisher Farm Inc.
-					</span>{" "}
-					While doing my job which managing and improving the operation system, I
-					develop custom projects tailored to meet the needs of various departments
-					within the head office, optimizing workflows and improving internal
-					processes.
-				</p>
-				<p className="mb-4 p-4 lg:p-0">
-					In 2024, I graduated from{" "}
-					<span className="font-bold hover:text-teal-400 opacity-100 cursor-pointer">
-						Bulacan State University - Hagonoy Campus with a major in Web and Mobile
-						Development
-					</span>
-					, where my foundation comes from in software development. Since then, I've
-					embraced{" "}
-					<span className="font-bold hover:text-teal-400 opacity-100 cursor-pointer">
-						continuous learning
-					</span>{" "}
-					and applied my skills in real-world projects. Alongside my full-time work,
-					I've collaborated with a client on freelance projects, which has further
-					honed my expertise and deepened my commitment to delivering impactful
-					software solutions.
-				</p>
-			</section>
+			<div className="relative z-10 lg:w-[58%]">
+				<section id="about" className="scroll-mt-24 pb-20 lg:pb-28">
+					<h2 className="mb-6 text-sm font-bold uppercase tracking-[0.16em] text-teal-300 lg:hidden">
+						About
+					</h2>
+					<div className="grid gap-3 sm:grid-cols-3">
+						{stats.map((item) => (
+							<div
+								key={item.label}
+								className="rounded-lg border border-slate-800 bg-slate-900/45 p-4"
+							>
+								<p className="text-3xl font-bold text-white">{item.value}</p>
+								<p className="mt-2 text-sm leading-5 text-slate-400">
+									{item.label}
+								</p>
+							</div>
+						))}
+					</div>
 
-				<section id="experience" className="mb-24 lg:mb-36">
-					<h1 className=" lg:hidden text-teal-400 font-bold pb-4 uppercase text-xl">
+					<div className="mt-8 space-y-5 leading-7 text-slate-400">
+						<p>
+							I am a web developer from the Philippines with two years of
+							hands-on experience turning workplace problems into shipped
+							software. My strongest projects are business tools: systems that
+							help people track work, manage records, train employees, and make
+							decisions faster.
+						</p>
+						<p>
+							What makes me useful on a remote team is ownership. I can talk to
+							users, understand the workflow, build the interface, connect the
+							database, deploy the product, and keep improving it after launch.
+						</p>
+						<p>
+							Right now, I am focused on full-stack roles where I can work with
+							Next.js, TypeScript, PHP, SQL, Supabase, and practical product
+							thinking to deliver reliable tools for real teams.
+						</p>
+					</div>
+				</section>
+
+				<section id="experience" className="scroll-mt-24 pb-20 lg:pb-28">
+					<h2 className="mb-6 text-sm font-bold uppercase tracking-[0.16em] text-teal-300 lg:hidden">
 						Experience
-					</h1>
-					{experiences.map((experience, index) => (
-						<div
-							key={index}
-							className={`mb-6 relative p-4 group transition-all duration-300 rounded-lg hover:bg-gray-700 hover:bg-opacity-30 ${
-								hoveredExperience === null || hoveredExperience === index
-									? "opacity-100"
-									: "opacity-30"
-							}`}
-							onMouseEnter={() => sethoveredExperience(index)}
-							onMouseLeave={() => sethoveredExperience(null)}
+					</h2>
+					<div className="space-y-4">
+						{experiences.map((experience, index) => {
+							const content = (
+								<article
+									className={`rounded-lg border border-transparent p-4 transition duration-300 hover:border-slate-700 hover:bg-slate-900/55 ${
+										hoveredExperience === null ||
+										hoveredExperience === index
+											? "opacity-100"
+											: "opacity-45"
+									}`}
+									onMouseEnter={() => setHoveredExperience(index)}
+									onMouseLeave={() => setHoveredExperience(null)}
+								>
+									<div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
+										<div>
+											<h3 className="text-lg font-bold text-white">
+												{experience.title}
+											</h3>
+											<p className="font-semibold text-teal-300">
+												{experience.company}
+											</p>
+										</div>
+										<p className="text-sm font-semibold text-slate-400 sm:text-right">
+											{experience.period}
+										</p>
+									</div>
+									<p className="mt-4 leading-7 text-slate-400">
+										{experience.description}
+									</p>
+									<div className="mt-4 flex flex-wrap gap-2">
+										{experience.skills.map((skill) => (
+											<span
+												key={skill}
+												className="rounded-full bg-teal-300/10 px-3 py-1 text-sm font-bold text-teal-200"
+											>
+												{skill}
+											</span>
+										))}
+									</div>
+								</article>
+							);
+
+							return experience.link ? (
+								<a
+									key={experience.title}
+									href={experience.link}
+									target="_blank"
+									rel="noopener noreferrer"
+									className="block"
+								>
+									{content}
+								</a>
+							) : (
+								<div key={experience.title}>{content}</div>
+							);
+						})}
+					</div>
+				</section>
+
+				<section id="project" className="scroll-mt-24 pb-20">
+					<div className="mb-6 flex items-end justify-between gap-4">
+						<h2 className="text-sm font-bold uppercase tracking-[0.16em] text-teal-300 lg:hidden">
+							Projects
+						</h2>
+						<a
+							href="/archive"
+							className="ml-auto text-sm font-bold text-slate-300 transition hover:text-teal-300"
 						>
+							Project archive
+						</a>
+					</div>
+
+					<div className="space-y-6">
+						{projects.map((project, index) => (
 							<a
-								href={experience.link}
+								key={project.title}
+								href={project.link}
 								target="_blank"
 								rel="noopener noreferrer"
-								className="block"
+								className={`group grid gap-5 rounded-lg border border-transparent p-4 transition duration-300 hover:border-slate-700 hover:bg-slate-900/55 sm:grid-cols-[170px_1fr] ${
+									hoveredProject === null || hoveredProject === index
+										? "opacity-100"
+										: "opacity-45"
+								}`}
+								onMouseEnter={() => setHoveredProject(index)}
+								onMouseLeave={() => setHoveredProject(null)}
 							>
-								<div className="flex justify-between items-start mb-2">
-									<h3 className="text-lg font-bold text-white group-hover:text-teal-400 transition-colors">
-										{experience.title}
-									</h3>
-									<span className="text-sm font-medium text-teal-400">
-										{experience.period}
-									</span>
-								</div>
-								<p className="text-base mb-4 opacity-60">
-									{experience.description}
-								</p>
-								<div className="flex flex-wrap gap-2">
-									{experience.skills.map((skill, idx) => (
-										<span
-											key={idx}
-											className="px-2 py-1 bg-teal-700 text-teal-400 font-bold bg-opacity-30 text-sm rounded-full"
-										>
-											{skill}
-										</span>
-									))}
-								</div>
-							</a>
-						</div>
-					))}
-					<a
-						href="/GYapCV2026.pdf"
-						target="_blank"
-						rel="noopener noreferrer"
-						className="font-bold hover:text-teal-400 opacity-100 cursor-pointer"
-					>
-						View Full Resume
-					</a>
-				</section>
-
-				<section id="project" className="mb-24 lg:mb-36">
-					<h1 className=" lg:hidden text-teal-400 font-bold pb-4 uppercase text-xl">
-						Project
-					</h1>
-					{projects.map((project, index) => (
-						<a
-							key={index}
-							href={project.link}
-							target="_blank"
-							rel="noopener noreferrer"
-							className={`block lg:flex mb-8 p-4 transition-all duration-300 ${
-								hoveredProject === null || hoveredProject === index
-									? "opacity-100"
-									: "opacity-30"
-							}`}
-							onMouseEnter={() => setHoveredProject(index)}
-							onMouseLeave={() => setHoveredProject(null)}
-						>
-							<div className="lg:w-1/3 mb-4 lg:mb-0">
 								<img
 									src={project.imgSrc}
-									alt={project.title}
-									className="rounded-lg w-full object-cover"
+									alt={`${project.title} screenshot`}
+									className="aspect-video w-full rounded-md border border-slate-800 object-cover"
 								/>
-							</div>
-							<div className="lg:w-2/3 lg:pl-6">
-								<h3 className="text-lg font-bold text-white">
-									{project.title}
-								</h3>
-								<p className="text-base mb-4 opacity-60">
-									{project.description}
-								</p>
-								<div className="flex flex-wrap gap-2">
-									{project.skills.map((skill, idx) => (
-										<span
-											key={idx}
-											className="px-2 py-1 bg-teal-700 text-teal-400 font-bold bg-opacity-30 text-sm rounded-full"
-										>
-											{skill}
-										</span>
-									))}
+								<div>
+									<p className="mb-2 text-sm font-bold text-teal-300">
+										{project.outcome}
+									</p>
+									<h3 className="flex items-center gap-2 text-lg font-bold text-white transition group-hover:text-teal-300">
+										{project.title}
+										<FaExternalLinkAlt
+											aria-hidden="true"
+											className="text-xs opacity-70"
+										/>
+									</h3>
+									<p className="mt-1 text-sm font-semibold text-slate-300">
+										{project.role}
+									</p>
+									<p className="mt-3 leading-7 text-slate-400">
+										{project.description}
+									</p>
+									<div className="mt-4 flex flex-wrap gap-2">
+										{project.skills.map((skill) => (
+											<span
+												key={skill}
+												className="rounded-full bg-teal-300/10 px-3 py-1 text-sm font-bold text-teal-200"
+											>
+												{skill}
+											</span>
+										))}
+									</div>
 								</div>
-							</div>
-						</a>
-					))}
-					<a
-						href="/archive"
-						className="font-bold hover:text-teal-400 opacity-100 cursor-pointer"
-					>
-						View Full Project Archive
-					</a>
+							</a>
+						))}
+					</div>
 				</section>
 			</div>
-		</div>
+		</main>
 	);
 }
