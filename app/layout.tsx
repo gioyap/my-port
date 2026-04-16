@@ -14,9 +14,9 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-	title: "Gio Yap | Full-Stack Developer",
+	title: "Gio Yap | Full-Stack Developer for Business Systems",
 	description:
-		"Full-stack developer building internal tools, dashboards, workflow systems, and business applications with Next.js, TypeScript, PHP, SQL, and Supabase.",
+		"Portfolio of Gio Yap, a full-stack developer building internal tools, dashboards, reporting systems, LMS platforms, and business workflow applications.",
 };
 
 export default function RootLayout({
@@ -27,7 +27,7 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body
-				className={`${geistSans.variable} ${geistMono.variable} antialiased bg-slate-950 relative  px-6 md:px-12 lg:max-w-screen-lg xl:max-w-screen-xl 3xl:max-w-screen-2xl mx-auto`}
+				className={`${geistSans.variable} ${geistMono.variable} bg-[#0b0f14] antialiased`}
 			>
 				{/* Main Content */}
 				{children}
