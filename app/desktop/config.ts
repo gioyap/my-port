@@ -168,4 +168,5 @@ export const initialWindows: Record<WindowKey, WindowState> = {
 	resume: { visible: false, open: false, x: 460, y: 118, z: 20 },
 	spotify: { visible: false, open: false, x: 980, y: 140, z: 10 },
 	photos: { visible: false, open: false, x: 700, y: 110, z: 15 },
+	projects: { visible: false, open: false, x: 230, y: 92, z: 18 },
 };

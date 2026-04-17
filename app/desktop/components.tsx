@@ -41,12 +41,16 @@ export function BootScreen() {
 export function HomeScreen({
 	clock,
 	onEnter,
+	isLeaving = false,
 }: {
 	clock: Date;
 	onEnter: () => void;
+	isLeaving?: boolean;
 }) {
 	return (
-		<section className="fixed inset-0 z-[180]">
+		<section
+			className={`fixed inset-0 z-[180] ${isLeaving ? "pointer-events-none animate-[homescreenLift_720ms_cubic-bezier(0.22,1,0.36,1)_forwards]" : ""}`}
+		>
 			<div className="flex min-h-screen items-center justify-center px-4">
 				<div className="w-full max-w-md rounded-[34px] border border-white/20 bg-black/25 p-8 text-center shadow-[0_30px_80px_rgba(0,0,0,0.35)] backdrop-blur-3xl">
 					<div className="mx-auto grid h-28 w-28 place-items-center rounded-full border border-white/20 bg-white/12 text-4xl font-semibold text-white shadow-[0_18px_40px_rgba(0,0,0,0.28)]">
@@ -253,12 +257,14 @@ export function DockButton({
 	label,
 	iconClass,
 	tileClass,
+	className = "",
 	onClick,
 }: {
 	icon: IconType;
 	label: string;
 	iconClass: string;
 	tileClass: string;
+	className?: string;
 	onClick: () => void;
 }) {
 	return (
@@ -266,7 +272,7 @@ export function DockButton({
 			type="button"
 			onClick={onClick}
 			aria-label={label}
-			className={`grid h-14 w-14 place-items-center rounded-[18px] border text-xl shadow-[0_18px_40px_rgba(0,0,0,0.28)] transition duration-200 hover:-translate-y-2 hover:scale-110 ${tileClass}`}
+			className={`grid h-14 w-14 place-items-center rounded-[18px] border text-xl shadow-[0_18px_40px_rgba(0,0,0,0.28)] transition duration-200 hover:-translate-y-2 hover:scale-110 ${tileClass} ${className}`}
 		>
 			<Icon className={iconClass} />
 		</button>

@@ -11,15 +11,6 @@ export type ProjectItem = {
 	image: string;
 	link: string;
 	accent: string;
-	caseStudy?: {
-		headline: string;
-		intro: string;
-		context: string;
-		problem: string[];
-		approach: string[];
-		results: string[];
-		features: string[];
-	};
 };
 
 export type ExperienceItem = {
@@ -46,34 +37,6 @@ export const projects: ProjectItem[] = [
 		image: "/images/ppms.png",
 		link: "https://demoplantperformance.netlify.app",
 		accent: "border-cyan-300/40 text-cyan-200 bg-cyan-300/10",
-		caseStudy: {
-			headline: "An operations dashboard for production teams that need answers fast.",
-			intro:
-				"I built this system to give plant and operations teams a clearer view of production performance without relying on scattered manual reporting.",
-			context:
-				"The product was designed for a real operating environment where supervisors and decision-makers need live information, not delayed summaries.",
-			problem: [
-				"Production data can be difficult to monitor when teams rely on fragmented spreadsheets or delayed reports.",
-				"Decision-makers need a single place to review key performance indicators and current plant activity.",
-				"Operational tools must be simple enough for busy internal users, not just technical teams.",
-			],
-			approach: [
-				"Designed the interface around fast scanning, clear status visibility, and dashboard-style layouts.",
-				"Built the app with Next.js and TypeScript, then connected the data layer with Supabase.",
-				"Prepared the deployment setup for a real business environment using Docker and Synology NAS infrastructure.",
-			],
-			results: [
-				"Created a clearer path from raw plant data to day-to-day operational visibility.",
-				"Showed that I can build software that supports ongoing internal business workflows, not just portfolio demos.",
-				"Strengthened my experience in full-stack delivery for operational systems.",
-			],
-			features: [
-				"KPI-focused dashboard views",
-				"Production monitoring workflows",
-				"Business-friendly UI for internal teams",
-				"Deployment setup for practical in-house use",
-			],
-		},
 	},
 	{
 		slug: "rsc-intern-hub",
@@ -89,34 +52,6 @@ export const projects: ProjectItem[] = [
 		image: "/images/intern.png",
 		link: "https://rscinternhub.netlify.app/",
 		accent: "border-amber-300/40 text-amber-200 bg-amber-300/10",
-		caseStudy: {
-			headline: "A reporting tool that made intern tracking easier for both interns and supervisors.",
-			intro:
-				"This project was more than a build task for me. I also led two OJT interns while making sure the product stayed useful, simple, and shippable.",
-			context:
-				"The goal was to replace a messy reporting flow with a lightweight internal system where interns could log tasks daily and export their work for documentation.",
-			problem: [
-				"Daily intern reporting was harder to manage when updates lived in disconnected manual files.",
-				"Supervisors needed a simpler way to review entries and prepare reports.",
-				"The system had to be easy enough for new interns to use immediately.",
-			],
-			approach: [
-				"Planned the workflow around the actual reporting habits of interns and supervisors.",
-				"Led development while guiding two interns through the build process and delivery expectations.",
-				"Used Next.js, TypeScript, Supabase, and Netlify to keep the stack modern and efficient.",
-			],
-			results: [
-				"Delivered a working internal tool that reduced friction in day-to-day reporting.",
-				"Demonstrated leadership alongside implementation by managing junior contributors.",
-				"Added a strong example of ownership, collaboration, and delivery to my portfolio.",
-			],
-			features: [
-				"Daily task logging",
-				"Export-ready reporting flow",
-				"Supervisor-friendly review process",
-				"Simple onboarding experience for interns",
-			],
-		},
 	},
 	{
 		slug: "rsc-university",

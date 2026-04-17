@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { FaExternalLinkAlt } from "react-icons/fa";
 import { experiences, projects } from "../data/portfolio";
 import {
@@ -8,7 +7,13 @@ import {
 import { Card } from "./components";
 import type { CommandKey } from "./types";
 
-export function TerminalOutput({ command }: { command: CommandKey }) {
+export function TerminalOutput({
+	command,
+	onOpenArchive,
+}: {
+	command: CommandKey;
+	onOpenArchive: () => void;
+}) {
 	if (command === "help") {
 		return (
 			<Card>
@@ -97,13 +102,14 @@ export function TerminalOutput({ command }: { command: CommandKey }) {
 						</p>
 					</article>
 				))}
-				<Link
-					href="/archive"
+				<button
+					type="button"
+					onClick={onOpenArchive}
 					className="inline-flex items-center gap-2 rounded-full border border-emerald-300/35 bg-emerald-300/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-emerald-100 transition hover:bg-emerald-300/20"
 				>
 					Open full archive
 					<FaExternalLinkAlt />
-				</Link>
+				</button>
 			</div>
 		);
 	}

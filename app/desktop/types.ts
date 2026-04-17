@@ -8,8 +8,8 @@ export type CommandKey =
 	| "github"
 	| "spotify";
 
-export type WindowKey = "terminal" | "resume" | "spotify" | "photos";
-export type Stage = "boot" | "home" | "desktop";
+export type WindowKey = "terminal" | "resume" | "spotify" | "photos" | "projects";
+export type Stage = "boot" | "home" | "entering" | "desktop";
 
 export type HistoryItem = {
 	id: number;
