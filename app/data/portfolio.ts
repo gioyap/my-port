@@ -23,9 +23,39 @@ export type ExperienceItem = {
 };
 
 export const projects: ProjectItem[] = [
+		{
+		slug: "webecommerce",
+		year: "2026",
+		title: "E-commerce Website",
+		company: "Own project",
+		type: "E-commerce platform",
+		summary:
+			"Online store built with a modern tech stack, featuring product listings, shopping cart functionality, and a streamlined checkout process.",
+		impact: "Full e-commerce experience built with modern web technologies",
+		role: "Full-stack developer",
+		stack: ["Next.js", "TypeScript", "Supabase", "Netlify", "Tailwind CSS", "n8n", "AI Integration"],
+		image: "/images/prodinline.png",
+		link: "https://shop-webecommerce.netlify.app",
+		accent: "border-teal-300/40 text-teal-200 bg-teal-300/10",
+	},
+			{
+		slug: "admin-ecommerce",
+		year: "2026",
+		title: "E-commerce Super Admin & Admin Panel",
+		company: "Own project",
+		type: "SaaS E-commerce platform",
+		summary:
+			"Admin dashboard for managing the e-commerce platform, including product management, order tracking, and user administration features.",
+		impact: "Admin dashboard for managing e-commerce operations built with modern web technologies",
+		role: "Full-stack developer",
+		stack: ["Next.js", "TypeScript", "Supabase", "Netlify", "Tailwind CSS", "n8n", "AI Integration"],
+		image: "/images/prodinline.png",
+		link: "https://ims-dashboard.netlify.app",
+		accent: "border-teal-300/40 text-teal-200 bg-teal-300/10",
+	},
 	{
 		slug: "prodinline",
-		year: "2025",
+		year: "2026",
 		title: "Production RM Inline Dashboard",
 		company: "Fisher Farms Inc.",
 		type: "Operations dashboard",
