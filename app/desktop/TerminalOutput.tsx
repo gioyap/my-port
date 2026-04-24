@@ -7,6 +7,8 @@ import {
 import { Card } from "./components";
 import type { CommandKey } from "./types";
 
+const terminalProjectSlugs = new Set(["prodinline", "plant-performance-management-system", "church-ministry-platform"]);
+
 export function TerminalOutput({
 	command,
 	onOpenArchive,
@@ -65,9 +67,13 @@ export function TerminalOutput({
 	}
 
 	if (command === "projects") {
+		const terminalProjects = projects.filter((project) =>
+			terminalProjectSlugs.has(project.slug),
+		);
+
 		return (
 			<div className="grid gap-3">
-				{projects.slice(0, 5).map((project) => (
+				{terminalProjects.map((project) => (
 					<article
 						key={project.slug}
 						className="rounded-2xl border border-white/10 bg-white/5 p-4"

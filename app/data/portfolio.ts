@@ -24,6 +24,21 @@ export type ExperienceItem = {
 
 export const projects: ProjectItem[] = [
 	{
+		slug: "prodinline",
+		year: "2025",
+		title: "Production RM Inline Dashboard",
+		company: "Fisher Farms Inc.",
+		type: "Operations dashboard",
+		summary:
+			"Operations dashboard for monitoring products from receiving to boxing, giving teams a clearer view of each production stage.",
+		impact: "Improved visibility across the product flow from intake to final boxing",
+		role: "Full-stack developer",
+		stack: ["Next.js", "TypeScript", "Supabase", "Docker", "Synology NAS"],
+		image: "/images/prodinline.png",
+		link: "https://demoprodinline.netlify.app",
+		accent: "border-teal-300/40 text-teal-200 bg-teal-300/10",
+	},
+	{
 		slug: "plant-performance-management-system",
 		year: "2025",
 		title: "Plant Performance Management System",
