@@ -23,7 +23,51 @@ export type ExperienceItem = {
 };
 
 export const projects: ProjectItem[] = [
-		{
+	{
+		slug: "bluesky-container-tracking-system",
+		year: "2026",
+		title: "BlueSky Container Tracking System",
+		company: "BlueSky",
+		type: "Internal logistics platform",
+		summary:
+			"Enterprise internal logistics platform for automating daily container tracking, shipping API synchronization, shipment dashboards, KPI analytics, and interactive map-based visibility.",
+		impact: "Automated container tracking and improved logistics visibility",
+		role: "Full-stack developer",
+		stack: [
+			"Next.js",
+			"TypeScript",
+			"Shipping APIs",
+			"Automation",
+			"Dashboards",
+			"Maps",
+		],
+		image: "/images/prodinline.png",
+		link: "https://cargotrackdemo.netlify.app/",
+		accent: "border-blue-300/40 text-blue-200 bg-blue-300/10",
+	},
+	{
+		slug: "uclear-customs-crm-client-portal",
+		year: "2026",
+		title: "UClear Customs CRM & Client Portal",
+		company: "UClear Customs Inc.",
+		type: "CRM and client portal",
+		summary:
+			"Operations platform for a Canadian customs brokerage firm, improving CRM workflows, client shipment visibility, document access, IIDA status tracking, ticket handling, and sales reporting.",
+		impact: "Improved customs brokerage workflows and client clearance visibility",
+		role: "Developer contributor",
+		stack: [
+			"CRM",
+			"Client Portal",
+			"CanData API",
+			"CBSA IIDA",
+			"Email Tickets",
+			"Dashboards",
+		],
+		image: "/images/prodinline.png",
+		link: "https://demo.uclear.g4tech.site/",
+		accent: "border-fuchsia-300/40 text-fuchsia-200 bg-fuchsia-300/10",
+	},
+	{
 		slug: "webecommerce",
 		year: "2026",
 		title: "E-commerce Website",
@@ -201,15 +245,15 @@ export const experiences: ExperienceItem[] = [
 	{
 		role: "Jr. Programmer",
 		company: "Fisher Farms Inc.",
-		period: "April 2025 - Present",
+		period: "April 2025 - May 2026",
 		summary:
-			"Maintain and improve internal systems for inventory, operations, and department-specific workflows.",
+			"Maintain and improve internal systems for inventory, operations, logistics, reporting, and department-specific workflows.",
 		highlights: [
 			"Improves existing business systems instead of only building static pages",
 			"Works directly with operational needs and internal users",
-			"Ships small tools that support head office teams",
+			"Builds and improves internal tools, dashboards, and tracking systems",
 		],
-		stack: ["PHP", "JavaScript", "MySQL", "Supabase", "Next.js"],
+		stack: ["PHP", "JavaScript", "MySQL", "Supabase", "Next.js", "TypeScript"],
 	},
 	{
 		role: "MIS-IT Analyst and Programmer",

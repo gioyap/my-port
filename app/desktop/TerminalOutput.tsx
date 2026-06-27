@@ -7,7 +7,7 @@ import {
 import { Card } from "./components";
 import type { CommandKey } from "./types";
 
-const terminalProjectSlugs = new Set(["webecommerce","admin-ecommerce","prodinline", "plant-performance-management-system", "church-ministry-platform"]);
+const terminalProjectSlugs = new Set(["bluesky-container-tracking-system", "uclear-customs-crm-client-portal", "webecommerce", "prodinline", "plant-performance-management-system", "church-ministry-platform"]);
 
 export function TerminalOutput({
 	command,
