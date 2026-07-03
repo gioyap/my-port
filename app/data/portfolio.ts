@@ -71,7 +71,7 @@ export const projects: ProjectItem[] = [
 		slug: "woodpaneldesigner",
 		year: "2026",
 		title: "Wood Panel Wall Designer",
-		company: "Own project",
+		company: "Client project",
 		type: "Custom wall layout and print production system",
 		summary:
 			"Web application for wood panel printing businesses where customers can upload photos, arrange panels on a virtual wall, review proofs, and download accurate hanging templates.",
@@ -87,7 +87,7 @@ export const projects: ProjectItem[] = [
 		slug: "preventivemaintenance",
 		year: "2026",
 		title: "Preventive Maintenance System",
-		company: "Own project",
+		company: "Fisher Farms Inc.",
 		type: "Maintenance management dashboard",
 		summary:
 			"Dashboard system for managing preventive maintenance activities, equipment monitoring, maintenance schedules, task tracking, and plant maintenance overview.",
