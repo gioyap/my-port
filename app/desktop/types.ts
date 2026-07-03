@@ -10,6 +10,7 @@ export type CommandKey =
 
 export type WindowKey = "terminal" | "resume" | "spotify" | "photos" | "projects";
 export type Stage = "boot" | "home" | "entering" | "desktop";
+export type Viewport = "mobile" | "tablet" | "desktop";
 
 export type HistoryItem = {
 	id: number;

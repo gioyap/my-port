@@ -3,7 +3,7 @@ import type { PointerEvent as ReactPointerEvent, ReactNode } from "react";
 import { FaApple } from "react-icons/fa";
 import type { IconType } from "react-icons";
 import { formatClock, formatMenuDate } from "./utils";
-import type { WindowState } from "./types";
+import type { Viewport, WindowState } from "./types";
 
 export function Wallpaper() {
 	return (
@@ -131,6 +131,7 @@ export function DesktopWindow({
 	onPointerDownHeader,
 	action,
 	light = false,
+	viewport = "desktop",
 }: {
 	title: string;
 	children: ReactNode;
@@ -141,11 +142,114 @@ export function DesktopWindow({
 	onPointerDownHeader: (event: ReactPointerEvent<HTMLDivElement>) => void;
 	action?: ReactNode;
 	light?: boolean;
+	viewport?: Viewport;
 }) {
+	const isOpen = windowState.open;
+
+	// Mobile: iOS-style bottom sheet
+	if (viewport === "mobile") {
+		const mobileZ = Math.max(windowState.z + 100, 110);
+		return (
+			<div
+				className="fixed inset-0 flex items-end"
+				style={{ zIndex: mobileZ }}
+				onMouseDown={onFocus}
+			>
+				{/* backdrop */}
+				<div
+					className="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity duration-200"
+					style={{ opacity: isOpen ? 1 : 0 }}
+					onClick={onClose}
+				/>
+				{/* sheet */}
+				<section
+					className={`relative w-full overflow-hidden rounded-t-[32px] border-x border-t shadow-[0_-20px_60px_rgba(0,0,0,0.5)] ${
+						light
+							? "border-white/30 bg-white text-slate-950"
+							: "border-white/20 bg-[#0b1020] text-white"
+					}`}
+					style={{
+						maxHeight: "90dvh",
+						transform: isOpen ? "translateY(0)" : "translateY(100%)",
+						transition: "transform 220ms cubic-bezier(0.32,0.72,0,1)",
+					}}
+					onClick={(e) => e.stopPropagation()}
+				>
+					{/* drag handle */}
+					<div className="flex justify-center pb-2 pt-3">
+						<div className="h-1 w-10 rounded-full bg-gray-400/40" />
+					</div>
+					<WindowBar
+						title={title}
+						action={action}
+						onClose={onClose}
+						onPointerDownHeader={() => {}}
+						light={light}
+					/>
+					<div
+						className="overflow-y-auto"
+						style={{ maxHeight: "calc(90dvh - 5rem)" }}
+					>
+						{children}
+					</div>
+				</section>
+			</div>
+		);
+	}
+
+	// Tablet: iPad-style centered modal
+	if (viewport === "tablet") {
+		const tabletZ = Math.max(windowState.z + 100, 110);
+		return (
+			<div
+				className="fixed inset-0 flex items-center justify-center p-6"
+				style={{ zIndex: tabletZ }}
+				onMouseDown={onFocus}
+			>
+				{/* backdrop */}
+				<div
+					className="absolute inset-0 bg-black/50 backdrop-blur-sm transition-opacity duration-200"
+					style={{ opacity: isOpen ? 1 : 0 }}
+					onClick={onClose}
+				/>
+				{/* modal */}
+				<section
+					className={`relative w-full max-w-[85vw] overflow-hidden rounded-[28px] border shadow-[0_40px_90px_rgba(0,0,0,0.5)] ${
+						light
+							? "border-white/30 bg-white text-slate-950"
+							: "border-white/25 bg-[#0b1020] text-white"
+					}`}
+					style={{
+						maxHeight: "85dvh",
+						opacity: isOpen ? 1 : 0,
+						transform: isOpen ? "scale(1)" : "scale(0.94)",
+						transition: "opacity 200ms ease-out, transform 200ms ease-out",
+					}}
+					onClick={(e) => e.stopPropagation()}
+				>
+					<WindowBar
+						title={title}
+						action={action}
+						onClose={onClose}
+						onPointerDownHeader={() => {}}
+						light={light}
+					/>
+					<div
+						className="overflow-y-auto"
+						style={{ maxHeight: "calc(85dvh - 3.5rem)" }}
+					>
+						{children}
+					</div>
+				</section>
+			</div>
+		);
+	}
+
+	// Desktop: existing draggable floating window
 	return (
 		<section
 			onMouseDown={onFocus}
-			className={`absolute top-0 rounded-[28px] border shadow-[0_40px_90px_rgba(0,0,0,0.42)] backdrop-blur-2xl transition-[opacity,transform] duration-200 ease-out ${widthClass} ${
+			className={`absolute top-0 overflow-hidden rounded-[28px] border shadow-[0_40px_90px_rgba(0,0,0,0.42)] backdrop-blur-2xl transition-[opacity,transform] duration-200 ease-out ${widthClass} ${
 				light
 					? "border-white/30 bg-white/75 text-slate-950"
 					: "border-white/25 bg-[#0b1020]/80 text-white"
@@ -153,8 +257,8 @@ export function DesktopWindow({
 			style={{
 				left: 0,
 				zIndex: windowState.z,
-				transform: `translate3d(${windowState.x}px, ${windowState.y}px, 0) scale(${windowState.open ? 1 : 0.94})`,
-				opacity: windowState.open ? 1 : 0,
+				transform: `translate3d(${windowState.x}px, ${windowState.y}px, 0) scale(${isOpen ? 1 : 0.94})`,
+				opacity: isOpen ? 1 : 0,
 			}}
 		>
 			<WindowBar
@@ -272,7 +376,7 @@ export function DockButton({
 			type="button"
 			onClick={onClick}
 			aria-label={label}
-			className={`grid h-14 w-14 place-items-center rounded-[18px] border text-xl shadow-[0_18px_40px_rgba(0,0,0,0.28)] transition duration-200 hover:-translate-y-2 hover:scale-110 ${tileClass} ${className}`}
+			className={`grid h-11 w-11 place-items-center rounded-[14px] border text-lg shadow-[0_18px_40px_rgba(0,0,0,0.28)] transition duration-200 hover:-translate-y-2 hover:scale-110 sm:h-14 sm:w-14 sm:rounded-[18px] sm:text-xl ${tileClass} ${className}`}
 		>
 			<Icon className={iconClass} />
 		</button>

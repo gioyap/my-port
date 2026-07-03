@@ -27,6 +27,7 @@ import {
 	StickyNote,
 	Wallpaper,
 } from "./desktop/components";
+import { useViewport } from "./desktop/hooks";
 import { TerminalOutput } from "./desktop/TerminalOutput";
 import type { CommandKey, DragState, HistoryItem, Stage, WindowKey } from "./desktop/types";
 import { formatClock, formatMenuDate, normalizeCommand } from "./desktop/utils";
@@ -41,6 +42,8 @@ export default function PortfolioDesktop() {
 	const [activePhotoIndex, setActivePhotoIndex] = useState(0);
 	const [selectedPhotoIndex, setSelectedPhotoIndex] = useState<number | null>(null);
 	const [selectedProjectSlug, setSelectedProjectSlug] = useState<string | null>(null);
+
+	const viewport = useViewport();
 
 	const desktopRef = useRef<HTMLDivElement | null>(null);
 	const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -159,7 +162,7 @@ export default function PortfolioDesktop() {
 	};
 
 	const beginDrag = (key: WindowKey, event: ReactPointerEvent<HTMLDivElement>) => {
-		if (window.innerWidth < 768 || !desktopRef.current) return;
+		if (viewport !== "desktop" || !desktopRef.current) return;
 		const bounds = desktopRef.current.getBoundingClientRect();
 		const state = windows[key];
 		setDragState({
@@ -285,6 +288,7 @@ export default function PortfolioDesktop() {
 								title={terminalTitle}
 								windowState={windows.terminal}
 								widthClass="w-[min(92vw,760px)]"
+								viewport={viewport}
 								onFocus={() => bringToFront("terminal")}
 								onClose={() => closeWindow("terminal")}
 								onPointerDownHeader={(event) => beginDrag("terminal", event)}
@@ -363,6 +367,7 @@ export default function PortfolioDesktop() {
 								windowState={windows.resume}
 								widthClass="w-[min(92vw,680px)]"
 								light
+								viewport={viewport}
 								onFocus={() => bringToFront("resume")}
 								onClose={() => closeWindow("resume")}
 								onPointerDownHeader={(event) => beginDrag("resume", event)}
@@ -383,7 +388,7 @@ export default function PortfolioDesktop() {
 										<iframe
 											src={resumeUrl}
 											title="Resume PDF"
-											className="h-[68vh] min-h-[500px] w-full"
+											className={`w-full ${viewport === "mobile" ? "h-[55dvh] min-h-[300px]" : "h-[68vh] min-h-[500px]"}`}
 										/>
 									</div>
 								</div>
@@ -396,12 +401,13 @@ export default function PortfolioDesktop() {
 								windowState={windows.projects}
 								widthClass="w-[min(92vw,920px)]"
 								light
+								viewport={viewport}
 								onFocus={() => bringToFront("projects")}
 								onClose={() => closeWindow("projects")}
 								onPointerDownHeader={(event) => beginDrag("projects", event)}
 							>
-								<div className="grid max-h-[72vh] grid-cols-[220px_1fr] overflow-hidden bg-[#eef2f7]">
-									<div className="border-r border-slate-300 bg-[#e4ebf3] p-4">
+								<div className={`bg-[#eef2f7] ${viewport !== "mobile" ? "grid max-h-[72vh] grid-cols-[220px_1fr] overflow-hidden" : ""}`}>
+									<div className={`border-r border-slate-300 bg-[#e4ebf3] p-4 ${viewport === "mobile" ? "hidden" : ""}`}>
 										<p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
 											Favorites
 										</p>
@@ -420,7 +426,7 @@ export default function PortfolioDesktop() {
 											</button>
 										</div>
 									</div>
-									<div className="max-h-[72vh] overflow-y-auto p-5">
+									<div className={viewport !== "mobile" ? "max-h-[72vh] overflow-y-auto p-5" : "p-4"}>
 										{selectedProjectSlug === null ? (
 											<div>
 												<p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
@@ -566,6 +572,7 @@ export default function PortfolioDesktop() {
 								windowState={windows.photos}
 								widthClass="w-[min(92vw,760px)]"
 								light
+								viewport={viewport}
 								onFocus={() => bringToFront("photos")}
 								onClose={() => closeWindow("photos")}
 								onPointerDownHeader={(event) => beginDrag("photos", event)}
@@ -599,6 +606,7 @@ export default function PortfolioDesktop() {
 								title="spotify"
 								windowState={windows.spotify}
 								widthClass="w-[min(92vw,420px)]"
+								viewport={viewport}
 								onFocus={() => bringToFront("spotify")}
 								onClose={() => closeWindow("spotify")}
 								onPointerDownHeader={(event) => beginDrag("spotify", event)}
@@ -661,7 +669,6 @@ export default function PortfolioDesktop() {
 								iconClass="text-white"
 								tileClass="border-sky-200/40 bg-[linear-gradient(180deg,rgba(96,165,250,0.96),rgba(37,99,235,0.98))]"
 								onClick={openProjectsArchive}
-								className="hidden md:grid"
 							/>
 							<DockButton
 								icon={FaFilePdf}
@@ -683,7 +690,6 @@ export default function PortfolioDesktop() {
 								iconClass="text-white"
 								tileClass="border-cyan-200/40 bg-[linear-gradient(180deg,rgba(56,189,248,0.96),rgba(37,99,235,0.98))]"
 								onClick={() => openWindow("photos")}
-								className="hidden md:grid"
 							/>
 							<DockButton
 								icon={FaSpotify}
