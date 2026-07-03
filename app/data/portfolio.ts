@@ -68,6 +68,37 @@ export const projects: ProjectItem[] = [
 		accent: "border-fuchsia-300/40 text-fuchsia-200 bg-fuchsia-300/10",
 	},
 	{
+		slug: "woodpaneldesigner",
+		year: "2026",
+		title: "Wood Panel Wall Designer",
+		company: "Own project",
+		type: "Custom wall layout and print production system",
+		summary:
+			"Web application for wood panel printing businesses where customers can upload photos, arrange panels on a virtual wall, review proofs, and download accurate hanging templates.",
+		impact:
+			"Streamlines the full workflow from customer photo upload and wall layout design to operator proofing, drilling template generation, and print-ready export",
+		role: "Full-stack developer",
+		stack: ["Next.js", "TypeScript", "Supabase", "Netlify", "Tailwind CSS", "PDF Generation", "Canvas Editor"],
+		image: "/images/woodpaneldesigner.png",
+		link: "https://woodpaneldesigner.netlify.app/",
+		accent: "border-amber-300/40 text-amber-200 bg-amber-300/10",
+	},
+	{
+		slug: "preventivemaintenance",
+		year: "2026",
+		title: "Preventive Maintenance System",
+		company: "Own project",
+		type: "Maintenance management dashboard",
+		summary:
+			"Dashboard system for managing preventive maintenance activities, equipment monitoring, maintenance schedules, task tracking, and plant maintenance overview.",
+		impact: "Helps organize maintenance workflows, monitor equipment status, and reduce manual tracking for preventive maintenance operations",
+		role: "Full-stack developer",
+		stack: ["Next.js", "TypeScript", "Supabase", "Netlify", "Tailwind CSS", "Docker", "Synology NAS"],
+		image: "/images/preventivemaintenance.png",
+		link: "https://demopms.netlify.app/",
+		accent: "border-emerald-300/40 text-emerald-200 bg-emerald-300/10",
+		},
+	{
 		slug: "webecommerce",
 		year: "2026",
 		title: "E-commerce Website",
